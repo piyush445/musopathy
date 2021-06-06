@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "923404982232",
+    "project_id": "musopathy-bfaea",
+    "storage_bucket": "musopathy-bfaea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923404982232:android:ed0bd9fba6ab93a32b04ad",
+        "android_client_info": {
+          "package_name": "com.example.musopathy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923404982232-4h2bms1s4me6027utrqbck3e9u7t9jb9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.musopathy",
+            "certificate_hash": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+          }
+        },
+        {
+          "client_id": "923404982232-bquadu7f1ap3a56kuisvg7etfkr3dtca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtEfMx6y0VthKGSUMrNf81W0q9RTKYsTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "923404982232-bquadu7f1ap3a56kuisvg7etfkr3dtca.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
