@@ -5,9 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:musopathy/models/data.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:musopathy/screens/payment.dart';
-import 'package:musopathy/widgets/Videotiles.dart';
-import 'package:musopathy/widgets/videoplayer.dart';
-
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:video_player/video_player.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -19,17 +17,14 @@ class VideoPage extends StatefulWidget {
 }
 
 class _VideoPageState extends State<VideoPage> {
-  VideoPlayerController _controller;
+  // VideoPlayerController _controller;
   bool paid;
-  Future<void> _initializeVideoPlayerFuture;
+  // Future<void> _initializeVideoPlayerFuture;
   List videoUrls = [];
   Videos videodata = new Videos();
   final _auth = FirebaseAuth.instance;
   //List oldtitles = ["01", "02", "03", "04"];
   List titles = [];
-  dynamic ic = Icons.play_arrow;
-  String url =
-      "https://firebasestorage.googleapis.com/v0/b/musopathy-bfaea.appspot.com/o/musopathy%2F01.mp4?alt=media&token=9b43361d-6360-402a-90af-0597a68cdd50";
 
   void getCurrentUser() async {
     try {
@@ -95,62 +90,110 @@ class _VideoPageState extends State<VideoPage> {
 
   void initial(String url) {
     // _controller.pause();
+    // setState(() {
+    //   _controller = VideoPlayerController.network(url);
+    //   _initializeVideoPlayerFuture = _controller.initialize();
+    //   _controller.play();
+    // });
     setState(() {
-      _controller = VideoPlayerController.network(url);
-      _initializeVideoPlayerFuture = _controller.initialize();
-      _controller.play();
+      _controller.loadUrl(url);
     });
   }
 
+  WebViewController _controller;
+  // final flutterWebviewPlugin = new FlutterWebviewPlugin();
+  final GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();
+  String url =
+      "https://player.vimeo.com/video/562218703?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479";
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(
-      "https://firebasestorage.googleapis.com/v0/b/musopathy-bfaea.appspot.com/o/musopathy%2F01.mp4?alt=media&token=9b43361d-6360-402a-90af-0597a68cdd50",
-      //videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
-    );
+    // _controller = VideoPlayerController.network(
+    //   "https://firebasestorage.googleapis.com/v0/b/musopathy-bfaea.appspot.com/o/musopathy%2F01.mp4?alt=media&token=9b43361d-6360-402a-90af-0597a68cdd50",
+    //videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
+    // );
 
-    _controller.addListener(() {
-      setState(() {});
-    });
+    // _controller.addListener(() {
+    //   setState(() {});
+    // });
 
-    _controller.setLooping(true);
-    _initializeVideoPlayerFuture = _controller.initialize();
+    // _controller.setLooping(true);
+    // _initializeVideoPlayerFuture = _controller.initialize();
 
     // initPlatformState();
-    // getCurrentUser();
-    // getdata();
 
     // void initPlatformState() {
     // this.downloadURLS();
   }
 
+  Future<void> initPlatformState() async {
+    await getCurrentUser();
+    getdata();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        bottomOpacity: 0.0,
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          iconSize: 30.0,
+          color: Theme.of(context).primaryColor,
+          onPressed: () {},
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        title: Text(
+          'MUSOPATHY',
+          style: TextStyle(
+            color: Colors.cyan,
+            fontFamily: 'Ubuntu',
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       // ignore: missing_required_param
       body: DraggableBottomSheet(
-        backgroundWidget: Container(
-            child: FutureBuilder(
-          future: _initializeVideoPlayerFuture,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return AspectRatio(
-                aspectRatio: _controller.value.aspectRatio,
-                child: Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: [
-                    VideoPlayer(_controller),
-                    //  ClosedCaption(text: _controller.value.caption.text),
-                    _ControlsOverlay(controller: _controller),
-                    VideoProgressIndicator(_controller, allowScrubbing: true),
-                  ],
-                ),
-              );
-            } else {
-              return Center(child: CircularProgressIndicator());
-            }
-          },
+        // backgroundWidget: Container(
+        //     child: FutureBuilder(
+        //   future: _initializeVideoPlayerFuture,
+        //   builder: (context, snapshot) {
+        //     if (snapshot.connectionState == ConnectionState.done) {
+        //       return AspectRatio(
+        //         aspectRatio: _controller.value.aspectRatio,
+        //         child: Stack(
+        //           alignment: Alignment.bottomCenter,
+        //           children: [
+        //             VideoPlayer(_controller),
+        //             //  ClosedCaption(text: _controller.value.caption.text),
+        //             _ControlsOverlay(controller: _controller),
+        //             VideoProgressIndicator(_controller, allowScrubbing: true),
+        //           ],
+        //         ),
+        //       );
+        //     } else {
+        //       return Center(child: CircularProgressIndicator());
+        //     }
+        //   },
+        // )),
+        backgroundWidget: SingleChildScrollView(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            LimitedBox(
+              maxHeight: 230,
+              maxWidth: double.infinity,
+              child: WebView(
+                  initialUrl: url,
+                  javascriptMode: JavascriptMode.unrestricted,
+                  onWebViewCreated: (WebViewController c) {
+                    _controller = c;
+                  }),
+            ),
+          ],
         )),
         expandedChild: Scaffold(
             backgroundColor: Colors.white,
@@ -159,17 +202,17 @@ class _VideoPageState extends State<VideoPage> {
                 ListTile(
                   title: Text("01.mp4"),
                   onTap: () {
+                    // print(_controller.value.aspectRatio);
                     initial(
-                        "https://firebasestorage.googleapis.com/v0/b/musopathy-bfaea.appspot.com/o/musopathy%2F01.mp4?alt=media&token=9b43361d-6360-402a-90af-0597a68cdd50");
+                        "https://player.vimeo.com/video/562218816?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479");
                   },
                 ),
                 ListTile(
                   title: Text("02.mp4"),
                   trailing: Icon(Icons.lock),
                   onTap: () {
-                    setState(() {
-                      _controller.pause();
-                    });
+                    //  _controller.pause();
+
                     Navigator.pushReplacement(
                         context, MaterialPageRoute(builder: (_) => Payment()));
                     // initial(
@@ -179,8 +222,9 @@ class _VideoPageState extends State<VideoPage> {
                 ListTile(
                   title: Text("03.mp4"),
                   onTap: () {
+                    // print(_controller.value.aspectRatio);
                     initial(
-                        "https://firebasestorage.googleapis.com/v0/b/musopathy-bfaea.appspot.com/o/musopathy%2F04.mp4?alt=media&token=f9cca684-6b7f-40c4-83ea-93d5cc5da605");
+                        "https://player.vimeo.com/video/562218277?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479");
                   },
                 ),
               ],

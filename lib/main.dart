@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:musopathy/screens/intropage.dart';
+
 import 'package:musopathy/screens/languagePage.dart';
 import 'package:musopathy/screens/payment.dart';
 import 'package:musopathy/screens/register.dart';
 
 import 'package:musopathy/screens/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:musopathy/screens/videopage.dart';
+import 'package:musopathy/screens/introPage2.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

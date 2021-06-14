@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:musopathy/screens/adduser.dart';
-import 'package:musopathy/screens/intropage.dart';
+import 'package:musopathy/screens/intropage2.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                   GestureDetector(
                     onTap: () => Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (_) => IntroScreen())),
+                        MaterialPageRoute(builder: (_) => WebViewExample())),
                     child: new Container(
                       margin:
                           EdgeInsets.symmetric(horizontal: 85.0, vertical: 40),

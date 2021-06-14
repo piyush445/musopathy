@@ -72,7 +72,7 @@ class _PaymentState extends State<Payment> {
     var options = {
       'key': 'rzp_test_NHgsWGJDPm1A5h',
       'amount': amount * 100,
-      'name': 'PIYUSH',
+      'name': 'MUSOPATHY',
       'description': 'videos access',
       'prefill': {
         'contact': '7488149849',
