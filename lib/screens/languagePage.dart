@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:musopathy/models/data.dart';
 import 'package:musopathy/screens/videopage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:musopathy/widgets/custom_drawer.dart';
+import 'package:musopathy/widgets/upperUI.dart';
+
+import 'package:provider/provider.dart';
 
 class Language extends StatefulWidget {
   @override
@@ -9,73 +14,137 @@ class Language extends StatefulWidget {
 }
 
 class _LanguageState extends State<Language> {
-  final _auth = FirebaseAuth.instance;
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  final GlobalKey<ScaffoldState> key2 = GlobalKey<ScaffoldState>();
+
+  // Future<void> updateUser(String lang) {
+  //   return users
+  //       .doc(widget.email)
+  //       .update({'language': lang})
+  //       .then((value) => print("User Updated"))
+  //       .catchError((error) => print("Failed to update user: $error"));
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("choose language"),
-      ),
-      body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          // crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => VideoPage()));
-              },
-              child: new Container(
-                //  margin: EdgeInsets.symmetric(horizontal: 70.0),
-                alignment: Alignment
-                    .center, // on giving this the container got its size later
-                height: 45.0,
-                decoration: BoxDecoration(
-                  color: Colors.indigo.shade800,
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: new Text(
-                  "English", //without alignment the size is according to the text
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 1.5,
-                  ),
-                ),
-              ),
+        key: key2,
+        drawer: CustomDrawer(),
+        appBar: AppBar(
+          elevation: 0,
+          bottomOpacity: 0.0,
+          leading: IconButton(
+              icon: Icon(Icons.menu),
+              iconSize: 30.0,
+              color: Theme.of(context).primaryColor,
+              onPressed: () => key2.currentState.openDrawer()),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          title: Text(
+            'Language',
+            style: TextStyle(
+              color: Colors.cyan,
+              fontFamily: 'Ubuntu',
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => VideoPage()));
-              },
-              child: new Container(
-                //margin: EdgeInsets.symmetric(horizontal: 70.0),
-                alignment: Alignment
-                    .center, // on giving this the container got its size later
-                height: 45.0,
-                decoration: BoxDecoration(
-                  color: Colors.red.shade500,
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: new Text(
-                  "Tamil", //without alignment the size is according to the text
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 1.5,
-                  ),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
-    );
+        body: SafeArea(
+            child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+
+                    //  mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      UpperUI(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 120),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          // crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary: Color.fromRGBO(14, 81, 102, 1.0),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(10.0)),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 30, vertical: 14)),
+                              onPressed: () async {
+                                Provider.of<Data>(context, listen: false)
+                                    .verify();
+
+                                Provider.of<Data>(context, listen: false)
+                                    .getLanguage("english");
+                                // if (Provider.of<Data>(context, listen: false)
+                                //         .loggedin ==
+                                //     true) {
+                                // //  await updateUser("english");
+                                // }
+
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => VideoPage()));
+                              },
+                              child: new Text(
+                                "English",
+                                textAlign: TextAlign
+                                    .center, //without alignment the size is according to the text
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 1.5,
+                                ),
+                              ),
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.pink.shade900,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(10.0)),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 30, vertical: 14)),
+                              onPressed: () async {
+                                Provider.of<Data>(context, listen: false)
+                                    .verify();
+
+                                Provider.of<Data>(context, listen: false)
+                                    .getLanguage("tamil");
+                                // if (Provider.of<Data>(context, listen: false)
+                                //         .loggedin ==
+                                //     true) {
+                                // //  await updateUser("tamil");
+                                // }
+
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => VideoPage()));
+                              },
+                              child: new Text(
+                                "Tamil",
+                                textAlign: TextAlign
+                                    .center, //without alignment the size is according to the text
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 1.5,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ]))));
   }
 }

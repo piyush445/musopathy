@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:musopathy/models/data.dart';
+import 'package:musopathy/screens/Landingpage.dart';
 
-import 'package:musopathy/screens/languagePage.dart';
 import 'package:musopathy/screens/payment.dart';
-import 'package:musopathy/screens/register.dart';
 
-import 'package:musopathy/screens/splashScreen.dart';
+import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:musopathy/screens/videopage.dart';
-import 'package:musopathy/screens/introPage2.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
   runApp(MyApp());
 }
 
@@ -32,27 +31,31 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        // Initialize FlutterFire:
-        future: _initialization,
-        builder: (context, snapshot) {
-          // Check for errors
-          if (snapshot.hasError) {
-            return Text("error");
-          }
+    return ChangeNotifierProvider(
+      create: (context) {
+        return Data();
+      },
+      child: FutureBuilder(
+          // Initialize FlutterFire:
+          future: _initialization,
+          builder: (context, snapshot) {
+            // Check for erro
+            if (snapshot.hasError) {
+              return Text("error");
+            }
 
-          // Once complete, show your application
-          if (snapshot.connectionState == ConnectionState.done) {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: 'Flutter Demo',
-              theme: ThemeData(
-                primarySwatch: Colors.blue,
-              ),
-              home: SplashScreen(),
-            );
-          }
-          return Center(child: CircularProgressIndicator());
-        });
+            // Once complete, show your application
+            if (snapshot.connectionState == ConnectionState.done) {
+              return MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  title: 'Flutter Demo',
+                  theme: ThemeData(
+                    primarySwatch: Colors.blue,
+                  ),
+                  home: LandingPage());
+            }
+            return Center(child: CircularProgressIndicator());
+          }),
+    );
   }
 }

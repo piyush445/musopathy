@@ -1,15 +1,19 @@
 import "package:flutter/material.dart";
 import 'package:draggable_bottom_sheet/draggable_bottom_sheet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:musopathy/models/data.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:musopathy/screens/loginUi.dart';
+
 import 'package:musopathy/screens/payment.dart';
+
+import 'package:musopathy/widgets/custom_drawer.dart';
+import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:video_player/video_player.dart';
+
+import 'package:connectivity/connectivity.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
-var loggedInUser;
 
 class VideoPage extends StatefulWidget {
   @override
@@ -17,132 +21,46 @@ class VideoPage extends StatefulWidget {
 }
 
 class _VideoPageState extends State<VideoPage> {
-  // VideoPlayerController _controller;
-  bool paid;
-  // Future<void> _initializeVideoPlayerFuture;
-  List videoUrls = [];
-  Videos videodata = new Videos();
-  final _auth = FirebaseAuth.instance;
-  //List oldtitles = ["01", "02", "03", "04"];
-  List titles = [];
-
-  void getCurrentUser() async {
-    try {
-      final user = await _auth.currentUser;
-      if (user != null) {
-        loggedInUser = user;
-      }
-    } catch (e) {
-      print(e);
+  ScrollController scrollController;
+  Future<int> checkConnection() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile) {
+      // I am connected to a mobile network.
+      return 1;
+    } else if (connectivityResult == ConnectivityResult.wifi) {
+      // I am connected to a wifi network.
+      return 1;
     }
-  }
-
-  void getdata() {
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(loggedInUser.email)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        print(documentSnapshot.data());
-        paid = Map.from(documentSnapshot.data())['paid'];
-        print(paid);
-      } else {
-        print("not exist");
-      }
-    });
-  }
-
-  downloadURLS() async {
-    firebase_storage.ListResult result = await firebase_storage
-        .FirebaseStorage.instance
-        .ref('musopathy/')
-        .listAll();
-
-    result.items.forEach((firebase_storage.Reference ref1) async {
-      titles.add(ref1.fullPath);
-      String downloadURL = await firebase_storage.FirebaseStorage.instance
-          .ref(ref1.fullPath.toString())
-          .getDownloadURL();
-
-      videoUrls.add(downloadURL.toString());
-      // print(downloadURL);
-
-      //  print(ref.fullPath);
-    }
-
-        // videodata.fetchTitles(titles);
-        );
-    try {
-      if (videoUrls.length == 0) {
-        print("error");
-      }
-
-      // videodata.fetchVideos(videoUrls);
-      // videodata.fetchTitles(titles);
-      // print(videoUrls);
-
-      //print(songsdata.songs);
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  void initial(String url) {
-    // _controller.pause();
-    // setState(() {
-    //   _controller = VideoPlayerController.network(url);
-    //   _initializeVideoPlayerFuture = _controller.initialize();
-    //   _controller.play();
-    // });
-    setState(() {
-      _controller.loadUrl(url);
-    });
+    return Future.error(
+        "This is the error", StackTrace.fromString("This is its trace"));
   }
 
   WebViewController _controller;
   // final flutterWebviewPlugin = new FlutterWebviewPlugin();
   final GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();
-  String url =
-      "https://player.vimeo.com/video/562218703?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479";
+
+  List li;
+
   @override
   void initState() {
     super.initState();
-    // _controller = VideoPlayerController.network(
-    //   "https://firebasestorage.googleapis.com/v0/b/musopathy-bfaea.appspot.com/o/musopathy%2F01.mp4?alt=media&token=9b43361d-6360-402a-90af-0597a68cdd50",
-    //videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
-    // );
-
-    // _controller.addListener(() {
-    //   setState(() {});
-    // });
-
-    // _controller.setLooping(true);
-    // _initializeVideoPlayerFuture = _controller.initialize();
-
-    // initPlatformState();
-
-    // void initPlatformState() {
-    // this.downloadURLS();
-  }
-
-  Future<void> initPlatformState() async {
-    await getCurrentUser();
-    getdata();
   }
 
   @override
   Widget build(BuildContext context) {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    final Future<int> result = checkConnection();
     return Scaffold(
+      key: key,
+      drawer: CustomDrawer(),
       appBar: AppBar(
         elevation: 0,
         bottomOpacity: 0.0,
         leading: IconButton(
-          icon: Icon(Icons.menu),
-          iconSize: 30.0,
-          color: Theme.of(context).primaryColor,
-          onPressed: () {},
-        ),
+            icon: Icon(Icons.menu),
+            iconSize: 30.0,
+            color: Theme.of(context).primaryColor,
+            onPressed: () => key.currentState.openDrawer()),
         centerTitle: true,
         backgroundColor: Colors.white,
         title: Text(
@@ -155,30 +73,7 @@ class _VideoPageState extends State<VideoPage> {
           ),
         ),
       ),
-      // ignore: missing_required_param
       body: DraggableBottomSheet(
-        // backgroundWidget: Container(
-        //     child: FutureBuilder(
-        //   future: _initializeVideoPlayerFuture,
-        //   builder: (context, snapshot) {
-        //     if (snapshot.connectionState == ConnectionState.done) {
-        //       return AspectRatio(
-        //         aspectRatio: _controller.value.aspectRatio,
-        //         child: Stack(
-        //           alignment: Alignment.bottomCenter,
-        //           children: [
-        //             VideoPlayer(_controller),
-        //             //  ClosedCaption(text: _controller.value.caption.text),
-        //             _ControlsOverlay(controller: _controller),
-        //             VideoProgressIndicator(_controller, allowScrubbing: true),
-        //           ],
-        //         ),
-        //       );
-        //     } else {
-        //       return Center(child: CircularProgressIndicator());
-        //     }
-        //   },
-        // )),
         backgroundWidget: SingleChildScrollView(
             child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -186,53 +81,171 @@ class _VideoPageState extends State<VideoPage> {
             LimitedBox(
               maxHeight: 230,
               maxWidth: double.infinity,
-              child: WebView(
-                  initialUrl: url,
-                  javascriptMode: JavascriptMode.unrestricted,
-                  onWebViewCreated: (WebViewController c) {
-                    _controller = c;
-                  }),
+              child: FutureBuilder<int>(
+                future: result, // a previously-obtained Future<String> or null
+                builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                  if (snapshot.hasData) {
+                    return WebView(
+                        initialUrl: Provider.of<Data>(context).currentUrl,
+                        javascriptMode: JavascriptMode.unrestricted,
+                        onWebViewCreated: (WebViewController c) {
+                          _controller = c;
+                        });
+                  } else if (snapshot.hasError) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(
+                          Icons.error_outline,
+                          color: Colors.red,
+                          size: 60,
+                        ),
+                        Text(
+                          "net:: ERR_INTERNET_DISCONNECTED",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        GestureDetector(
+                          child: Text("Tap to retry once connected"),
+                          onTap: () {
+                            setState(() {});
+                          },
+                        ),
+                      ],
+                    );
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                // Provider.of<Data>(context, listen: false).name,
+                Provider.of<Data>(context).currentname,
+                style: TextStyle(
+                  fontFamily: 'Ubuntu',
+                  color: Colors.black,
+                  fontSize: 25,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                Provider.of<Data>(context).currentdesc,
+                style: TextStyle(
+                  fontFamily: 'Ubuntu',
+                  color: Color(0xFFDFDFDF),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            )
           ],
         )),
-        expandedChild: Scaffold(
-            backgroundColor: Colors.white,
-            body: ListView(
-              children: [
-                ListTile(
-                  title: Text("01.mp4"),
-                  onTap: () {
-                    // print(_controller.value.aspectRatio);
-                    initial(
-                        "https://player.vimeo.com/video/562218816?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479");
-                  },
-                ),
-                ListTile(
-                  title: Text("02.mp4"),
-                  trailing: Icon(Icons.lock),
-                  onTap: () {
-                    //  _controller.pause();
+        expandedChild: DraggableScrollableSheet(
+          initialChildSize: 0.8,
+          minChildSize: 0.8,
+          maxChildSize: 1.0,
+          builder: (BuildContext context, ScrollController scrollController) =>
+              Scaffold(
+                  body: FutureBuilder<DocumentSnapshot>(
+            future: users.doc("videos").get(),
+            builder: (BuildContext context,
+                AsyncSnapshot<DocumentSnapshot> snapshot) {
+              if (snapshot.hasError) {
+                return Text("Something went wrong");
+              }
 
-                    Navigator.pushReplacement(
-                        context, MaterialPageRoute(builder: (_) => Payment()));
-                    // initial(
-                    //     "https://firebasestorage.googleapis.com/v0/b/musopathy-bfaea.appspot.com/o/musopathy%2F03.mp4?alt=media&token=0a820bf8-74f2-40aa-ba11-7376df1c0048");
+              if (snapshot.hasData && !snapshot.data.exists) {
+                return Text("Document does not exist");
+              }
+
+              if (snapshot.connectionState == ConnectionState.done) {
+                Map<String, dynamic> data =
+                    snapshot.data.data() as Map<String, dynamic>;
+                li = List.from(data['exercises']);
+                Provider.of<Data>(context, listen: false).fetchVideos(li);
+
+                return ListView.builder(
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                        color: Color(0xEFEFEF),
+                        child: ListTile(
+                          trailing: (index > 0 && index < 8) &&
+                                  (Provider.of<Data>(context, listen: false)
+                                              .loggedin ==
+                                          false ||
+                                      Provider.of<Data>(context, listen: false)
+                                              .account["paid"] ==
+                                          false)
+                              ? Icon(
+                                  Icons.lock,
+                                  color: Colors.black,
+                                )
+                              : null,
+                          leading: CircleAvatar(child: Text("${index + 1}")),
+                          title: Text(
+                              Provider.of<Data>(context).li[index]["name"]),
+                          subtitle: Text(
+                              Provider.of<Data>(context, listen: false)
+                                  .li[index]["description"]),
+                          onTap: () {
+                            print(index);
+                            if ((index > 0 && index < 8)) {
+                              if ((Provider.of<Data>(context, listen: false)
+                                          .loggedin ==
+                                      true) &&
+                                  Provider.of<Data>(context, listen: false)
+                                      .account["paid"]) {
+                                //  initial(link, newname, Provider.of<Data>(context,listen: false).li[index]["description"]);
+                                Provider.of<Data>(context, listen: false)
+                                    .updateCurrentDetails(index);
+                                _controller.loadUrl(
+                                    Provider.of<Data>(context, listen: false)
+                                        .currentUrl);
+                              } else if (Provider.of<Data>(context,
+                                          listen: false)
+                                      .loggedin ==
+                                  true) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => Payment()));
+                                //  print(email);
+                              } else {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => MyHomePage()));
+                              }
+                            } else {
+                              Provider.of<Data>(context, listen: false)
+                                  .updateCurrentDetails(index);
+                              _controller.loadUrl(
+                                  Provider.of<Data>(context, listen: false)
+                                      .currentUrl);
+                            }
+                          },
+                        ));
                   },
-                ),
-                ListTile(
-                  title: Text("03.mp4"),
-                  onTap: () {
-                    // print(_controller.value.aspectRatio);
-                    initial(
-                        "https://player.vimeo.com/video/562218277?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479");
-                  },
-                ),
-              ],
-            )),
+                  itemCount: li.length,
+                );
+              }
+
+              return Text("loading");
+            },
+          )),
+        ),
         previewChild: Container(
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-                color: Colors.pink,
+                color: Colors.cyan,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20))),
@@ -255,83 +268,8 @@ class _VideoPageState extends State<VideoPage> {
               //SizedBox(height: 16),
             ])),
         minExtent: 65,
-        maxExtent: MediaQuery.of(context).size.height * 0.6,
+        maxExtent: MediaQuery.of(context).size.height * 0.8,
       ),
-    );
-  }
-}
-
-class _ControlsOverlay extends StatelessWidget {
-  _ControlsOverlay({@required this.controller});
-
-  static const _examplePlaybackRates = [
-    0.25,
-    0.5,
-    1.0,
-    1.5,
-    2.0,
-    3.0,
-    5.0,
-    10.0,
-  ];
-
-  final VideoPlayerController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        AnimatedSwitcher(
-          duration: Duration(milliseconds: 50),
-          reverseDuration: Duration(milliseconds: 200),
-          child: controller.value.isPlaying
-              ? SizedBox.shrink()
-              : Container(
-                  color: Colors.black26,
-                  child: Center(
-                    child: Icon(
-                      Icons.play_arrow,
-                      color: Colors.white,
-                      size: 100.0,
-                    ),
-                  ),
-                ),
-        ),
-        GestureDetector(
-          onTap: () {
-            controller.value.isPlaying ? controller.pause() : controller.play();
-          },
-        ),
-        Align(
-          alignment: Alignment.topRight,
-          child: PopupMenuButton<double>(
-            initialValue: controller.value.playbackSpeed,
-            tooltip: 'Playback speed',
-            onSelected: (speed) {
-              controller.setPlaybackSpeed(speed);
-            },
-            itemBuilder: (context) {
-              return [
-                for (final speed in _examplePlaybackRates)
-                  PopupMenuItem(
-                    value: speed,
-                    child: Text('${speed}x'),
-                  )
-              ];
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                // Using less vertical padding as the text is also longer
-                // horizontally, so it feels like it would need more spacing
-                // horizontally (matching the aspect ratio of the video).
-                vertical: 12,
-                horizontal: 16,
-              ),
-              child: Text('${controller.value.playbackSpeed}x'),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
