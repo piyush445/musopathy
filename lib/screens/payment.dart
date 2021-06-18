@@ -73,7 +73,7 @@ class _PaymentState extends State<Payment> {
                         ],
                       ),
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(50, 141, 215, 232),
+                        color: Colors.blue.shade50,
                         borderRadius: BorderRadius.circular(15),
                       ),
                     )

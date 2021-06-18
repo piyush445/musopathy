@@ -28,7 +28,8 @@ class _LandingPageState extends State<LandingPage> {
         Provider.of<Data>(context, listen: false).logout();
       } else {
         Provider.of<Data>(context, listen: false).verify();
-
+        // Provider.of<Data>(context, listen: false).getCurrentUserDetails();
+        // print(_currentuser.email);
         Provider.of<Data>(context, listen: false).login();
       }
     });

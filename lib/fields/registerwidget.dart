@@ -141,8 +141,7 @@ class Registerwidget extends State<Register> {
                         }
                       } catch (e) {
                         Fluttertoast.showToast(
-                            msg: "Error in SignUp",
-                            toastLength: Toast.LENGTH_LONG);
+                            msg: "$e", toastLength: Toast.LENGTH_LONG);
                         _formkey.currentState.reset();
 
 //                        print(e);
@@ -175,8 +174,9 @@ class Registerwidget extends State<Register> {
                               content: Text(
                                   "This following sets out the terms and conditions on which you may use the content onbusiness-standard.com website, business-standard.com's mobile browser site, Business Standard instore Applications and other digital publishing services (www.smartinvestor.in, www.bshindi.com and www.bsmotoring,com) owned by Business Standard Private Limited, all the services herein will be referred to as Business Standard Content Services."),
                               actions: [
-                                FlatButton(
-                                  textColor: Colors.black,
+                                TextButton(
+                                  // textColor: Colors.black,
+                                  style: ButtonStyle(),
                                   onPressed: () => Navigator.pop(context),
                                   child: Text('CANCEL'),
                                 ),

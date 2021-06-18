@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musopathy/models/data.dart';
+import 'package:musopathy/screens/contact.dart';
 import 'package:musopathy/screens/introPage2.dart';
 import 'package:musopathy/screens/languagePage.dart';
 import 'package:musopathy/screens/mtbtshow.dart';
@@ -40,11 +41,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircleAvatar(
-                    child: Image(
-                  width: double.infinity,
-                  image: AssetImage("assets/images/muso.png"),
-                  fit: BoxFit.cover,
-                )),
+                  //     child: Image(
+                  //   width: double.infinity,
+                  //   image: AssetImage("assets/images/muso.png"),
+                  //   fit: BoxFit.cover,
+                  // )),
+                  child: Text(Provider.of<Data>(context).userName),
+                ),
                 Text(
                   "Musopathy",
                   style: TextStyle(color: Colors.white, fontSize: 25),
@@ -85,7 +88,15 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
             ),
           ),
-          _buildDrawerOption("Contact us", () {}),
+          _buildDrawerOption(
+            "Contact us",
+            () => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => ContactScreen(),
+              ),
+            ),
+          ),
           Expanded(
             child: Provider.of<Data>(context).loggedin == true
                 ? Align(

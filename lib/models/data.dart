@@ -23,8 +23,6 @@ class Data extends ChangeNotifier {
       if (user == null) {
         print('User is currently signed out!');
       } else {
-        // print("i am on");
-
         email = user.email;
         print('User is signed in!');
         firestore
@@ -101,4 +99,30 @@ class Data extends ChangeNotifier {
         .then((value) => print("User Updated"))
         .catchError((error) => print("Failed to update user: $error"));
   }
-}
+
+//   void getCurrentUserDetails() async {
+//     User user = _auth.currentUser;
+//     if (user != null) {
+//       //print(user.displayName);
+//       email = user.email;
+
+//       await firestore
+//           .collection('users')
+//           .doc(user.email)
+//           .get()
+//           .then((DocumentSnapshot documentSnapshot) {
+//         if (documentSnapshot.exists) {
+//           //  print(documentSnapshot.data());
+//           account = Map.from(documentSnapshot.data());
+//           userName = account["name"];
+//           print(account);
+//           // photourl = account["photourl"].toString();
+//           // print(photourl);
+//         } else {
+//           print("not exist");
+//         }
+//       });
+//     }
+//     notifyListeners();
+//   }
+// }

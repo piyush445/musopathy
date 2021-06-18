@@ -17,36 +17,41 @@ class SignInwidget extends State<SignIn> {
   final GoogleSignIn _googleSignIn = new GoogleSignIn();
 
   Future<UserCredential> signInWithGoogle() async {
+    var authresult;
     // Trigger the authentication flow
-    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+    try {
+      final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
 
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
 
-    // Once signed in, return the UserCredential
-    final authresult =
-        await FirebaseAuth.instance.signInWithCredential(credential);
-    // UserCredential newUser1 = await signInWithGoogle();
-    if (authresult != null) {
-      Provider.of<Data>(context, listen: false).login();
+      // Once signed in, return the UserCredential
+      authresult = await FirebaseAuth.instance.signInWithCredential(credential);
+      // UserCredential newUser1 = await signInWithGoogle();
+      if (authresult != null) {
+        Provider.of<Data>(context, listen: false).login();
 
-      var user = AddUser(authresult.user.displayName, false, 7050818912,
-          authresult.user.email, authresult.user.photoURL);
-      user.addUser();
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => Language()));
-      //  print(email);
+        var user = AddUser(authresult.user.displayName, false, 7050818912,
+            authresult.user.email, authresult.user.photoURL);
+        user.addUser();
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (_) => Language()));
+        //  print(email);
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: "$e", toastLength: Toast.LENGTH_LONG);
+    } finally {
+      setState(() {
+        showspinner = false;
+      });
     }
-    setState(() {
-      showspinner = false;
-    });
     return authresult;
   }
   //signing with credential
@@ -143,8 +148,7 @@ class SignInwidget extends State<SignIn> {
                           }
                         } catch (e) {
                           Fluttertoast.showToast(
-                              msg: "Error in Login",
-                              toastLength: Toast.LENGTH_LONG);
+                              msg: "$e", toastLength: Toast.LENGTH_LONG);
                           _formkey.currentState.reset();
                         } finally {
                           setState(() {
