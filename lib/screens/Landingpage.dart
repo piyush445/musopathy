@@ -4,7 +4,7 @@ import 'package:musopathy/models/data.dart';
 import 'package:musopathy/screens/introPage2.dart';
 
 import 'package:musopathy/screens/splashScreen.dart';
-import 'package:musopathy/screens/videopage.dart';
+
 import 'package:provider/provider.dart';
 
 class LandingPage extends StatefulWidget {
@@ -13,43 +13,33 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  User _currentuser;
   final _auth = FirebaseAuth.instance;
 
-  Map account = {};
   var user;
 
   @override
   void initState() {
     super.initState();
+    _currentuser = _auth.currentUser;
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      if (_currentuser == null) {
+        Provider.of<Data>(context, listen: false).logout();
+      } else {
+        Provider.of<Data>(context, listen: false).verify();
+
+        Provider.of<Data>(context, listen: false).login();
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<User>(
-      stream: _auth.authStateChanges(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.active) {
-          user = snapshot.data;
-          if (user == null) {
-            Provider.of<Data>(context, listen: false).logout();
-            return SplashScreen();
-          } else if (user != null) {
-            Provider.of<Data>(context, listen: false).verify();
-
-            Provider.of<Data>(context, listen: false).login();
-            // print(Provider.of<Data>(context, listen: false).language);
-            //  Provider.of<Data>(context, listen: false).getLanguage(
-            // Provider.of<Data>(context, listen: false).account["language"]);
-
-            return WebViewExample();
-          }
-        }
-        return Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
-      },
-    );
+    if (_currentuser == null) {
+      return SplashScreen();
+    } else {
+      return WebViewExample();
+    }
   }
 }

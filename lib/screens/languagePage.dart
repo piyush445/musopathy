@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:musopathy/models/data.dart';
 import 'package:musopathy/screens/videopage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,14 +16,6 @@ class Language extends StatefulWidget {
 class _LanguageState extends State<Language> {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   final GlobalKey<ScaffoldState> key2 = GlobalKey<ScaffoldState>();
-
-  // Future<void> updateUser(String lang) {
-  //   return users
-  //       .doc(widget.email)
-  //       .update({'language': lang})
-  //       .then((value) => print("User Updated"))
-  //       .catchError((error) => print("Failed to update user: $error"));
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -78,15 +70,7 @@ class _LanguageState extends State<Language> {
                                       horizontal: 30, vertical: 14)),
                               onPressed: () async {
                                 Provider.of<Data>(context, listen: false)
-                                    .verify();
-
-                                Provider.of<Data>(context, listen: false)
                                     .getLanguage("english");
-                                // if (Provider.of<Data>(context, listen: false)
-                                //         .loggedin ==
-                                //     true) {
-                                // //  await updateUser("english");
-                                // }
 
                                 Navigator.pushReplacement(
                                     context,
@@ -115,15 +99,7 @@ class _LanguageState extends State<Language> {
                                       horizontal: 30, vertical: 14)),
                               onPressed: () async {
                                 Provider.of<Data>(context, listen: false)
-                                    .verify();
-
-                                Provider.of<Data>(context, listen: false)
                                     .getLanguage("tamil");
-                                // if (Provider.of<Data>(context, listen: false)
-                                //         .loggedin ==
-                                //     true) {
-                                // //  await updateUser("tamil");
-                                // }
 
                                 Navigator.pushReplacement(
                                     context,

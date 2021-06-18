@@ -10,11 +10,20 @@ import 'package:firebase_core/firebase_core.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(MyApp());
+  runApp(
+    /// Providers are above [MyApp] instead of inside it, so that tests
+    /// can use [MyApp] while mocking the providers
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Data()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 /// We are using a StatefulWidget such that we only create the [Future] once,
-/// no matter how many times our widget rebuild.
+
 /// If we used a [StatelessWidget], in the event where [App] is rebuilt, that
 /// would re-initialize FlutterFire and make our application re-enter loading state,
 /// which is undesired.
@@ -31,31 +40,26 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) {
-        return Data();
-      },
-      child: FutureBuilder(
-          // Initialize FlutterFire:
-          future: _initialization,
-          builder: (context, snapshot) {
-            // Check for erro
-            if (snapshot.hasError) {
-              return Text("error");
-            }
+    return FutureBuilder(
+        // Initialize FlutterFire:
+        future: _initialization,
+        builder: (context, snapshot) {
+          // Check for erro
+          if (snapshot.hasError) {
+            return Text("error");
+          }
 
-            // Once complete, show your application
-            if (snapshot.connectionState == ConnectionState.done) {
-              return MaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  title: 'Flutter Demo',
-                  theme: ThemeData(
-                    primarySwatch: Colors.blue,
-                  ),
-                  home: LandingPage());
-            }
-            return Center(child: CircularProgressIndicator());
-          }),
-    );
+          // Once complete, show your application
+          if (snapshot.connectionState == ConnectionState.done) {
+            return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'Flutter Demo',
+                theme: ThemeData(
+                  primarySwatch: Colors.blue,
+                ),
+                home: LandingPage());
+          }
+          return Center(child: CircularProgressIndicator());
+        });
   }
 }

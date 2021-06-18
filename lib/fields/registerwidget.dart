@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,6 +34,12 @@ class Registerwidget extends State<Register> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  validator: (val) {
+                    if (val.isEmpty) {
+                      return "enter name";
+                    }
+                    return null;
+                  },
                   controller: _username,
                   decoration: InputDecoration(
                     hintText: "username",
@@ -45,6 +52,12 @@ class Registerwidget extends State<Register> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  validator: (val) {
+                    if (val.isEmpty) {
+                      return "enter email";
+                    }
+                    return null;
+                  },
                   controller: _emailsignin,
                   decoration: InputDecoration(
                     hintText: "something@example.com",
@@ -101,10 +114,15 @@ class Registerwidget extends State<Register> {
                     BoxDecoration(borderRadius: BorderRadius.circular(30)),
                 child: ElevatedButton(
                   onPressed: () async {
-                    setState(() {
-                      showspinner = true;
-                    });
+                    FocusScopeNode currentFocus = FocusScope.of(context);
+
+                    if (!currentFocus.hasPrimaryFocus) {
+                      currentFocus.unfocus();
+                    }
                     if (_formkey.currentState.validate()) {
+                      setState(() {
+                        showspinner = true;
+                      });
                       try {
                         final newUser =
                             await _auth.createUserWithEmailAndPassword(
@@ -116,18 +134,25 @@ class Registerwidget extends State<Register> {
                           var user = AddUser(_username.text, false, 7050818912,
                               newUser.user.email, newUser.user.photoURL);
                           user.addUser();
+
                           Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: (_) => Language()));
                           //  print(email);
                         }
+                      } catch (e) {
+                        Fluttertoast.showToast(
+                            msg: "Error in SignUp",
+                            toastLength: Toast.LENGTH_LONG);
+                        _formkey.currentState.reset();
+
+//                        print(e);
+
+                      } finally {
                         setState(() {
                           showspinner = false;
                         });
-                      } catch (e) {
-                        print(e);
                       }
                     }
-                    _formkey.currentState.reset();
                   },
                   child: Text("Register"),
                   style: ElevatedButton.styleFrom(
@@ -137,6 +162,49 @@ class Registerwidget extends State<Register> {
                       onPrimary: Colors.white),
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.only(top: 30),
+                child: InkWell(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Expanded(
+                            child: AlertDialog(
+                              title: Text('Terms and Conditions'),
+                              content: Text(
+                                  "This following sets out the terms and conditions on which you may use the content onbusiness-standard.com website, business-standard.com's mobile browser site, Business Standard instore Applications and other digital publishing services (www.smartinvestor.in, www.bshindi.com and www.bsmotoring,com) owned by Business Standard Private Limited, all the services herein will be referred to as Business Standard Content Services."),
+                              actions: [
+                                FlatButton(
+                                  textColor: Colors.black,
+                                  onPressed: () => Navigator.pop(context),
+                                  child: Text('CANCEL'),
+                                ),
+                                FlatButton(
+                                  textColor: Colors.black,
+                                  onPressed: () => Navigator.pop(context),
+                                  child: Text('ACCEPT'),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: RichText(
+                      text: TextSpan(
+                        text: ' By signing you agree with our ',
+                        style: TextStyle(color: Colors.cyan),
+                        children: const <TextSpan>[
+                          TextSpan(
+                              text: 'Terms and Conditions',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black)),
+                        ],
+                      ),
+                    )),
+              )
             ],
           ),
         ),

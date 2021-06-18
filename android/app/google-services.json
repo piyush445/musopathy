@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "923404982232-4h2bms1s4me6027utrqbck3e9u7t9jb9.apps.googleusercontent.com",
+          "client_id": "923404982232-58cqklnogc72vs0q0mu45pch2a7h59sf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.musopathy",
-            "certificate_hash": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+            "certificate_hash": "7cdc3a2792b4f8c8eb59d8532a0b9adec03cc764"
           }
         },
         {

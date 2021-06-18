@@ -10,6 +10,7 @@ class Data extends ChangeNotifier {
   String currentdesc;
   String email;
   String userName;
+  String photourl;
 
   List li;
   Map account = {};
@@ -23,6 +24,7 @@ class Data extends ChangeNotifier {
         print('User is currently signed out!');
       } else {
         // print("i am on");
+
         email = user.email;
         print('User is signed in!');
         firestore
@@ -33,6 +35,8 @@ class Data extends ChangeNotifier {
           if (documentSnapshot.exists) {
             //  print(documentSnapshot.data());
             account = Map.from(documentSnapshot.data());
+            photourl = account["photourl"].toString();
+            print(photourl);
           } else {
             print("not exist");
           }
