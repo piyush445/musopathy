@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "923404982232-58cqklnogc72vs0q0mu45pch2a7h59sf.apps.googleusercontent.com",
+          "client_id": "923404982232-n57u4dakjt2rgkec631cb85pupl7o8fe.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.musopathy",
-            "certificate_hash": "7cdc3a2792b4f8c8eb59d8532a0b9adec03cc764"
+            "certificate_hash": "8821c4ca11ee51c7a498f01e038086b37764700c"
           }
         },
         {
@@ -37,6 +37,13 @@
             {
               "client_id": "923404982232-bquadu7f1ap3a56kuisvg7etfkr3dtca.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "923404982232-meqphrnjogir5h900p6rklv4tp4j27j6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.musopathy"
+              }
             }
           ]
         }
