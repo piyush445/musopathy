@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:musopathy/models/data.dart';
 import 'package:musopathy/screens/videopage.dart';
@@ -19,6 +20,9 @@ class _LanguageState extends State<Language> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return Scaffold(
         key: key2,
         drawer: CustomDrawer(),
@@ -69,9 +73,10 @@ class _LanguageState extends State<Language> {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 30, vertical: 14)),
                               onPressed: () async {
+                                //Provider.of<Data>(context, listen: false)
+                                //  .getLanguage("english");
                                 Provider.of<Data>(context, listen: false)
-                                    .getLanguage("english");
-
+                                    .getVideos("english");
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
@@ -98,9 +103,10 @@ class _LanguageState extends State<Language> {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 30, vertical: 14)),
                               onPressed: () async {
+                                // Provider.of<Data>(context, listen: false)
+                                //     .getLanguage("tamil");
                                 Provider.of<Data>(context, listen: false)
-                                    .getLanguage("tamil");
-
+                                    .getVideos("tamil");
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
@@ -120,7 +126,29 @@ class _LanguageState extends State<Language> {
                             ),
                           ],
                         ),
-                      )
+                      ),
+                      Center(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: Color.fromRGBO(14, 81, 102, 1.0),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0)),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 30, vertical: 14)),
+                          onPressed: () {},
+                          child: new Text(
+                            "Join Live Courses",
+                            textAlign: TextAlign
+                                .center, //without alignment the size is according to the text
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1.5,
+                            ),
+                          ),
+                        ),
+                      ),
                     ]))));
   }
 }

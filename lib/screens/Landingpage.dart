@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:musopathy/models/data.dart';
 import 'package:musopathy/screens/introPage2.dart';
 
@@ -28,8 +29,7 @@ class _LandingPageState extends State<LandingPage> {
         Provider.of<Data>(context, listen: false).logout();
       } else {
         Provider.of<Data>(context, listen: false).verify();
-        // Provider.of<Data>(context, listen: false).getCurrentUserDetails();
-        // print(_currentuser.email);
+
         Provider.of<Data>(context, listen: false).login();
       }
     });
@@ -37,6 +37,9 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     if (_currentuser == null) {
       return SplashScreen();
     } else {

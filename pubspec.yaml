@@ -59,8 +59,9 @@ dependencies:
   google_fonts: ^2.1.0
   provider: ^5.0.0
   firebase_database: ^7.1.1
-  google_sign_in:
+  google_sign_in: ^5.0.2
   flutter_email_sender: ^5.0.0
+  country_code_picker: ^2.0.2
   
   
   

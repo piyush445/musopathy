@@ -48,7 +48,6 @@ class _VideoPageState extends State<VideoPage> {
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference users = FirebaseFirestore.instance.collection('users');
     final Future<int> result = checkConnection();
     return Scaffold(
       key: key,
@@ -61,15 +60,16 @@ class _VideoPageState extends State<VideoPage> {
             iconSize: 30.0,
             color: Theme.of(context).primaryColor,
             onPressed: () => key.currentState.openDrawer()),
+        iconTheme: IconThemeData(color: Color.fromRGBO(40, 115, 161, 1.0)),
         centerTitle: true,
         backgroundColor: Colors.white,
         title: Text(
-          'MUSOPATHY',
+          'M U S O P A T H Y',
           style: TextStyle(
-            color: Colors.cyan,
+            color: Color.fromRGBO(40, 115, 161, 1.0),
             fontFamily: 'Ubuntu',
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            fontWeight: FontWeight.normal,
           ),
         ),
       ),
@@ -84,7 +84,8 @@ class _VideoPageState extends State<VideoPage> {
               child: FutureBuilder<int>(
                 future: result, // a previously-obtained Future<String> or null
                 builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-                  if (snapshot.hasData) {
+                  if (snapshot.hasData &&
+                      Provider.of<Data>(context).currentUrl != null) {
                     return WebView(
                         initialUrl: Provider.of<Data>(context).currentUrl,
                         javascriptMode: JavascriptMode.unrestricted,
@@ -93,7 +94,7 @@ class _VideoPageState extends State<VideoPage> {
                         });
                   } else if (snapshot.hasError) {
                     return Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
                           Icons.error_outline,
@@ -125,7 +126,9 @@ class _VideoPageState extends State<VideoPage> {
               padding: const EdgeInsets.all(20.0),
               child: Text(
                 // Provider.of<Data>(context, listen: false).name,
-                Provider.of<Data>(context).currentname,
+                Provider.of<Data>(context).currentname == null
+                    ? "loading.."
+                    : Provider.of<Data>(context).currentname,
                 style: TextStyle(
                   fontFamily: 'Ubuntu',
                   color: Colors.black,
@@ -137,7 +140,9 @@ class _VideoPageState extends State<VideoPage> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text(
-                Provider.of<Data>(context).currentdesc,
+                Provider.of<Data>(context).currentdesc == null
+                    ? "loading.."
+                    : Provider.of<Data>(context).currentdesc,
                 style: TextStyle(
                   fontFamily: 'Ubuntu',
                   color: Color(0xFFDFDFDF),
@@ -153,56 +158,51 @@ class _VideoPageState extends State<VideoPage> {
           minChildSize: 0.8,
           maxChildSize: 1.0,
           builder: (BuildContext context, ScrollController scrollController) =>
-              Scaffold(
-                  body: FutureBuilder<DocumentSnapshot>(
-            future: users.doc("videos").get(),
-            builder: (BuildContext context,
-                AsyncSnapshot<DocumentSnapshot> snapshot) {
-              if (snapshot.hasError) {
-                return Text("Something went wrong");
-              }
-
-              if (snapshot.hasData && !snapshot.data.exists) {
-                return Text("Document does not exist");
-              }
-
-              if (snapshot.connectionState == ConnectionState.done) {
-                Map<String, dynamic> data =
-                    snapshot.data.data() as Map<String, dynamic>;
-                li = List.from(data['exercises']);
-                Provider.of<Data>(context, listen: false).fetchVideos(li);
-
-                return ListView.builder(
+              FutureBuilder<int>(
+            future: result, // a previously-obtained Future<String> or null
+            builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+              if (snapshot.hasData && Provider.of<Data>(context).li != null) {
+                return Scaffold(
+                    body: ListView.builder(
                   itemBuilder: (BuildContext context, int index) {
                     return Card(
-                        color: Color(0xEFEFEF),
+                        color: Colors.white,
                         child: ListTile(
                           trailing: (index > 0 && index < 8) &&
-                                  (Provider.of<Data>(context, listen: false)
-                                              .loggedin ==
+                                  (Provider.of<Data>(context).loggedin ==
                                           false ||
-                                      Provider.of<Data>(context, listen: false)
-                                              .account["paid"] ==
+                                      Provider.of<Data>(
+                                            context,
+                                          ).paid ==
                                           false)
                               ? Icon(
                                   Icons.lock,
                                   color: Colors.black,
                                 )
                               : null,
-                          leading: CircleAvatar(child: Text("${index + 1}")),
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: Text(
+                              "${index + 1}",
+                              style: TextStyle(
+                                  color: Color.fromRGBO(40, 115, 161, 1.0)),
+                            ),
+                          ),
                           title: Text(
-                              Provider.of<Data>(context).li[index]["name"]),
+                            Provider.of<Data>(context).li[index]["name"],
+                            style: TextStyle(
+                                color: Color.fromRGBO(40, 115, 161, 1.0)),
+                          ),
                           subtitle: Text(
                               Provider.of<Data>(context, listen: false)
                                   .li[index]["description"]),
                           onTap: () {
-                            print(index);
                             if ((index > 0 && index < 8)) {
                               if ((Provider.of<Data>(context, listen: false)
                                           .loggedin ==
                                       true) &&
                                   Provider.of<Data>(context, listen: false)
-                                      .account["paid"]) {
+                                      .paid) {
                                 //  initial(link, newname, Provider.of<Data>(context,listen: false).li[index]["description"]);
                                 Provider.of<Data>(context, listen: false)
                                     .updateCurrentDetails(index);
@@ -217,7 +217,6 @@ class _VideoPageState extends State<VideoPage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (_) => Payment()));
-                                //  print(email);
                               } else {
                                 Navigator.pushReplacement(
                                     context,
@@ -234,18 +233,25 @@ class _VideoPageState extends State<VideoPage> {
                           },
                         ));
                   },
-                  itemCount: li.length,
-                );
+                  itemCount:
+                      Provider.of<Data>(context, listen: false).li.length,
+                ));
               }
 
-              return Text("loading");
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             },
-          )),
+          ),
         ),
+
+        // li = List.from(data['exercises']);
+        // Provider.of<Data>(context, listen: false).fetchVideos(li);
+
         previewChild: Container(
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-                color: Colors.cyan,
+                color: Color.fromRGBO(40, 115, 161, 1.0),
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20))),

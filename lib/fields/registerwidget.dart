@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:musopathy/models/data.dart';
 import 'package:musopathy/models/adduser.dart';
-import 'package:musopathy/screens/languagePage.dart';
+import 'package:musopathy/screens/Landingpage.dart';
+import 'package:musopathy/widgets/BUtton.dart';
+
 import 'package:provider/provider.dart';
 
 class Register extends StatefulWidget {
@@ -22,6 +25,9 @@ class Registerwidget extends State<Register> {
   bool showspinner = false;
 
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return ModalProgressHUD(
       inAsyncCall: showspinner,
       child: Form(
@@ -32,7 +38,8 @@ class Registerwidget extends State<Register> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(
+                    left: 25, top: 5, right: 25, bottom: 16),
                 child: TextFormField(
                   validator: (val) {
                     if (val.isEmpty) {
@@ -50,7 +57,8 @@ class Registerwidget extends State<Register> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(
+                    left: 25, top: 5, right: 25, bottom: 16),
                 child: TextFormField(
                   validator: (val) {
                     if (val.isEmpty) {
@@ -68,7 +76,8 @@ class Registerwidget extends State<Register> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.only(
+                    left: 25, top: 5, right: 25, bottom: 16),
                 child: TextFormField(
                   controller: _passwordsignin,
                   obscureText: true,
@@ -87,7 +96,8 @@ class Registerwidget extends State<Register> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(
+                    left: 25, top: 5, right: 25, bottom: 16),
                 child: TextFormField(
                   controller: _passwordretype,
                   obscureText: true,
@@ -107,104 +117,99 @@ class Registerwidget extends State<Register> {
                   ),
                 ),
               ),
-              Container(
-                width: MediaQuery.of(context).size.width / 1.4,
-                height: 45,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(30)),
-                child: ElevatedButton(
-                  onPressed: () async {
-                    FocusScopeNode currentFocus = FocusScope.of(context);
+              Button(
+                "SignUp",
+                () async {
+                  FocusScopeNode currentFocus = FocusScope.of(context);
 
-                    if (!currentFocus.hasPrimaryFocus) {
-                      currentFocus.unfocus();
-                    }
-                    if (_formkey.currentState.validate()) {
-                      setState(() {
-                        showspinner = true;
-                      });
-                      try {
-                        final newUser =
-                            await _auth.createUserWithEmailAndPassword(
-                                email: _emailsignin.text.trim(),
-                                password: _passwordsignin.text.trim());
+                  if (!currentFocus.hasPrimaryFocus) {
+                    currentFocus.unfocus();
+                  }
+                  if (_formkey.currentState.validate()) {
+                    setState(() {
+                      showspinner = true;
+                    });
+                    try {
+                      final newUser =
+                          await _auth.createUserWithEmailAndPassword(
+                              email: _emailsignin.text.trim(),
+                              password: _passwordsignin.text.trim());
 
-                        if (newUser != null) {
-                          Provider.of<Data>(context, listen: false).login();
-                          var user = AddUser(_username.text, false, 7050818912,
-                              newUser.user.email, newUser.user.photoURL);
-                          user.addUser();
+                      if (newUser != null) {
+                        Provider.of<Data>(context, listen: false).login();
 
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (_) => Language()));
-                          //  print(email);
-                        }
-                      } catch (e) {
+                        var user = AddUser(
+                            _username.text,
+                            false,
+                            null,
+                            newUser.user.email,
+                            newUser.user.photoURL,
+                            null,
+                            null,
+                            null,
+                            false);
+                        user.addUser();
+                        // Provider.of<Data>(context, listen: false).verify();
                         Fluttertoast.showToast(
-                            msg: "$e", toastLength: Toast.LENGTH_LONG);
-                        _formkey.currentState.reset();
-
-//                        print(e);
-
-                      } finally {
-                        setState(() {
-                          showspinner = false;
-                        });
+                            msg: "success", toastLength: Toast.LENGTH_LONG);
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (_) => LandingPage()));
+                        //  print(email);
                       }
+                    } catch (e) {
+                      Fluttertoast.showToast(
+                          msg: "signup failed", toastLength: Toast.LENGTH_LONG);
+                      _formkey.currentState.reset();
+                    } finally {
+                      setState(() {
+                        showspinner = false;
+                      });
                     }
-                  },
-                  child: Text("Register"),
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
-                      primary: Colors.blueGrey,
-                      onPrimary: Colors.white),
-                ),
+                  }
+                },
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 30),
-                child: InkWell(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Expanded(
-                            child: AlertDialog(
-                              title: Text('Terms and Conditions'),
-                              content: Text(
-                                  "This following sets out the terms and conditions on which you may use the content onbusiness-standard.com website, business-standard.com's mobile browser site, Business Standard instore Applications and other digital publishing services (www.smartinvestor.in, www.bshindi.com and www.bsmotoring,com) owned by Business Standard Private Limited, all the services herein will be referred to as Business Standard Content Services."),
-                              actions: [
-                                TextButton(
-                                  // textColor: Colors.black,
-                                  style: ButtonStyle(),
-                                  onPressed: () => Navigator.pop(context),
-                                  child: Text('CANCEL'),
-                                ),
-                                FlatButton(
-                                  textColor: Colors.black,
-                                  onPressed: () => Navigator.pop(context),
-                                  child: Text('ACCEPT'),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    child: RichText(
-                      text: TextSpan(
-                        text: ' By signing you agree with our ',
-                        style: TextStyle(color: Colors.cyan),
-                        children: const <TextSpan>[
-                          TextSpan(
-                              text: 'Terms and Conditions',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black)),
-                        ],
-                      ),
-                    )),
-              )
+              InkWell(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Expanded(
+                          child: AlertDialog(
+                            title: Text('Terms and Conditions'),
+                            content: Text(
+                                "This following sets out the terms and conditions on which you may use the content onbusiness-standard.com website, business-standard.com's mobile browser site, Business Standard instore Applications and other digital publishing services (www.smartinvestor.in, www.bshindi.com and www.bsmotoring,com) owned by Business Standard Private Limited, all the services herein will be referred to as Business Standard Content Services."),
+                            actions: [
+                              TextButton(
+                                // textColor: Colors.black,
+                                style: ButtonStyle(),
+                                onPressed: () => Navigator.pop(context),
+                                child: Text('CANCEL'),
+                              ),
+                              TextButton(
+                                // textColor: Colors.black,
+                                onPressed: () => Navigator.pop(context),
+                                child: Text('ACCEPT'),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  child: RichText(
+                    text: TextSpan(
+                      text: ' By signing you agree with our ',
+                      style:
+                          TextStyle(color: Color.fromRGBO(40, 115, 161, 1.0)),
+                      children: const <TextSpan>[
+                        TextSpan(
+                            text: 'Terms and Conditions',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black)),
+                      ],
+                    ),
+                  ))
             ],
           ),
         ),

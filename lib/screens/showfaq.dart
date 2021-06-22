@@ -1,10 +1,11 @@
 import "package:flutter/material.dart";
+import 'package:flutter/services.dart';
 import 'package:musopathy/models/faqdata.dart';
 import 'package:musopathy/screens/faq.dart';
 import 'package:musopathy/widgets/custom_drawer.dart';
 
 class ShowFaq extends StatelessWidget {
- final  List<Entry> data = <Entry>[
+  final List<Entry> data = <Entry>[
     Entry("What is Covid Literacy and why is it important? ", <Entry>[
       Entry(
           "There is a bombardment of information, misinformation and even disinformation from multiple sources regarding Covid, leading to massive levels of confusion among even highly educated people, let alone the less educated ones.  Consequently, tens of  millions end up choosing to not get tested or vaccinated and millions to go to hospitals when not necessary. A huge number of people lose their health - or even lives - because they did not get treated on time. Covid Literacy is a must as people need to be constantly educated to discern between reliable and unreliable information so that they can take the best informed decisions possible in their own interests and that of those around them. "),
@@ -75,12 +76,13 @@ class ShowFaq extends StatelessWidget {
   final GlobalKey<ScaffoldState> key1 = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return Scaffold(
       key: key1,
       drawer: CustomDrawer(),
       appBar: AppBar(
-        elevation: 0,
-        bottomOpacity: 0.0,
         leading: IconButton(
             icon: Icon(Icons.menu),
             iconSize: 30.0,
@@ -89,12 +91,12 @@ class ShowFaq extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
         title: Text(
-          'FAQs',
+          'M U S O P A T H Y',
           style: TextStyle(
-            color: Colors.cyan,
+            color: Color.fromRGBO(40, 115, 161, 1.0),
             fontFamily: 'Ubuntu',
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            fontWeight: FontWeight.normal,
           ),
         ),
       ),

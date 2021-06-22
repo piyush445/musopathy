@@ -11,6 +11,12 @@ class Data extends ChangeNotifier {
   String email;
   String userName;
   String photourl;
+  String phn;
+  bool fpwd = false;
+  bool paid = false;
+  String country;
+  String dob;
+  String gender;
 
   List li;
   Map account = {};
@@ -18,14 +24,14 @@ class Data extends ChangeNotifier {
   final _auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   CollectionReference users = FirebaseFirestore.instance.collection('users');
-  void verify() {
+  void verify() async {
     _auth.authStateChanges().listen((User user) async {
       if (user == null) {
         print('User is currently signed out!');
       } else {
-        email = user.email;
+        //email = user.email;
         print('User is signed in!');
-        firestore
+        await firestore
             .collection('users')
             .doc(user.email)
             .get()
@@ -34,7 +40,13 @@ class Data extends ChangeNotifier {
             //  print(documentSnapshot.data());
             account = Map.from(documentSnapshot.data());
             photourl = account["photourl"].toString();
-            print(photourl);
+            email = account["email"];
+            userName = account["full_name"];
+            phn = account["phoneno"];
+            paid = account["paid"];
+            gender = account["gender"];
+            dob = account["dob"];
+            country = account["country"];
           } else {
             print("not exist");
           }
@@ -46,28 +58,12 @@ class Data extends ChangeNotifier {
 
   void login() {
     loggedin = true;
-    // language = account["language"];
+
     notifyListeners();
   }
 
   void logout() {
     loggedin = false;
-    notifyListeners();
-  }
-
-  void getLanguage(String l) {
-    language = l;
-    if (language == "english") {
-      currentname = "Preparation & Posture ...";
-      currentUrl =
-          "https://player.vimeo.com/video/562218703?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479";
-      currentdesc = "Preparation and Posture..";
-    } else if (language == "tamil") {
-      currentname = "தயாரிப்பு & நிலை Preparation & Posture";
-      currentUrl =
-          "https://player.vimeo.com/video/562783946?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479";
-      currentdesc = "Preparation and Posture..";
-    }
     notifyListeners();
   }
 
@@ -89,9 +85,6 @@ class Data extends ChangeNotifier {
     notifyListeners();
   }
 
-  updatelanguage() {
-    //when logged in
-  }
   Future<void> updateUserPayment() {
     return users
         .doc(email)
@@ -100,29 +93,54 @@ class Data extends ChangeNotifier {
         .catchError((error) => print("Failed to update user: $error"));
   }
 
-//   void getCurrentUserDetails() async {
-//     User user = _auth.currentUser;
-//     if (user != null) {
-//       //print(user.displayName);
-//       email = user.email;
+  void pwreset() {
+    fpwd = !fpwd;
+    notifyListeners();
+  }
 
-//       await firestore
-//           .collection('users')
-//           .doc(user.email)
-//           .get()
-//           .then((DocumentSnapshot documentSnapshot) {
-//         if (documentSnapshot.exists) {
-//           //  print(documentSnapshot.data());
-//           account = Map.from(documentSnapshot.data());
-//           userName = account["name"];
-//           print(account);
-//           // photourl = account["photourl"].toString();
-//           // print(photourl);
-//         } else {
-//           print("not exist");
-//         }
-//       });
-//     }
-//     notifyListeners();
-//   }
-// }
+  void updatePayment() {
+    paid = true;
+    notifyListeners();
+  }
+
+  void getVideos(String l) async {
+    await firestore
+        .collection('users')
+        .doc("videos")
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        //  print(documentSnapshot.data());
+        Map<dynamic, dynamic> map = Map.from(documentSnapshot.data());
+        li = List.from(map['exercises']);
+        print(li[0]);
+      } else {
+        print("not exist");
+      }
+    });
+    language = l;
+    if (language == "english") {
+      currentname = li[0]['ename'];
+      currentUrl = li[0]["elink"];
+
+      currentdesc = li[0]["description"];
+    } else if (language == "tamil") {
+      currentUrl = li[0]["tlink"];
+      currentname = li[0]["tname"];
+      currentdesc = li[0]["description"];
+    }
+    notifyListeners();
+  }
+
+  Future<void> updateUserDetails(String g, String d, String co, String p) {
+    if (g == "" || g == null) g = gender;
+    if (d == "" || d == null) d = dob;
+    if (co == "" || co == null) co = country;
+    if (p == "" || p == null) p = phn;
+    return users
+        .doc(email)
+        .update({"gender": g, "dob": d, "country": co, "phoneno": p})
+        .then((value) => print("User Updated"))
+        .catchError((error) => print("Failed to update user: $error"));
+  }
+}

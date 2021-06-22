@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:musopathy/models/data.dart';
+import 'package:musopathy/screens/MyAccount2.dart';
 import 'package:musopathy/screens/contact.dart';
 import 'package:musopathy/screens/introPage2.dart';
 import 'package:musopathy/screens/languagePage.dart';
+import 'package:musopathy/screens/loginUi.dart';
 import 'package:musopathy/screens/mtbtshow.dart';
 import 'package:musopathy/screens/showfaq.dart';
-import 'package:musopathy/screens/videopage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +22,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
         title: Text(
           title,
           style: TextStyle(
-              fontSize: 20.0, color: Color.fromARGB(200, 69, 155, 174)),
+              fontSize: 20.0, color: Color.fromRGBO(40, 115, 161, 1.0)),
         ),
         onTap: onTap,
       ),
@@ -34,20 +35,23 @@ class _CustomDrawerState extends State<CustomDrawer> {
       child: Column(
         children: [
           Container(
-            height: MediaQuery.of(context).size.width * 0.6,
+            height: 200,
             width: double.infinity,
-            color: Color.fromARGB(200, 69, 155, 174),
+            // color: Color.fromARGB(100, 69, 155, 174),
+            color: Color.fromRGBO(40, 115, 161, 1.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircleAvatar(
-                  //     child: Image(
-                  //   width: double.infinity,
-                  //   image: AssetImage("assets/images/muso.png"),
-                  //   fit: BoxFit.cover,
-                  // )),
-                  child: Text(Provider.of<Data>(context).userName),
-                ),
+                    child: Provider.of<Data>(context, listen: false).loggedin ==
+                            true
+                        ? Text(Provider.of<Data>(context, listen: false)
+                            .userName[0])
+                        : Image(
+                            width: double.infinity,
+                            image: AssetImage("assets/images/muso.png"),
+                            fit: BoxFit.cover,
+                          )),
                 Text(
                   "Musopathy",
                   style: TextStyle(color: Colors.white, fontSize: 25),
@@ -96,6 +100,22 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 builder: (_) => ContactScreen(),
               ),
             ),
+          ),
+          _buildDrawerOption(
+            "My Account",
+            () => Provider.of<Data>(context, listen: false).loggedin == true
+                ? Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => MyAccount2(),
+                    ),
+                  )
+                : Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => MyHomePage(),
+                    ),
+                  ),
           ),
           Expanded(
             child: Provider.of<Data>(context).loggedin == true

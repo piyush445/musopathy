@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/services.dart';
+
 import 'package:musopathy/fields/signinwidget.dart';
 import 'package:musopathy/fields/registerwidget.dart';
+import 'package:musopathy/models/data.dart';
+import 'package:musopathy/screens/Forgot.dart';
 import 'package:musopathy/widgets/custom_drawer.dart';
 import 'package:musopathy/widgets/upperUI.dart';
+import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -19,6 +23,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     final tabcontroller = new TabController(length: 2, vsync: this);
 
     return Scaffold(
@@ -34,9 +41,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             fontWeight: FontWeight.normal,
           ),
         ),
-        //   actions: [],
-        //   centerTitle: true,
-        //   elevation: 4,
+        elevation: 4,
       ),
       drawer: CustomDrawer(),
       body: SafeArea(
@@ -70,7 +75,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               Expanded(
                   child: TabBarView(
                 children: [
-                  SignIn(),
+                  Provider.of<Data>(
+                            context,
+                          ).fpwd ==
+                          false
+                      ? SignIn()
+                      : ForgotScreen(),
                   Register(),
                 ],
                 controller: tabcontroller,

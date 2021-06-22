@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:musopathy/widgets/custom_drawer.dart';
 import 'package:musopathy/widgets/upperUI.dart';
@@ -13,9 +13,13 @@ class _ContactScreenState extends State<ContactScreen> {
   final GlobalKey<ScaffoldState> key2 = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return Scaffold(
       key: key2,
       appBar: AppBar(
+        centerTitle: true,
         leading: IconButton(
             icon: Icon(Icons.menu),
             iconSize: 30.0,
@@ -64,7 +68,7 @@ class _ContactScreenState extends State<ContactScreen> {
                     child: Card(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
-                      elevation: 4,
+                      elevation: 2,
                       color: Colors.blue.shade50,
                       child: Padding(
                         padding: const EdgeInsets.all(10),

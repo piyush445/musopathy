@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:musopathy/models/data.dart';
 
 import 'package:musopathy/screens/languagePage.dart';
 import 'package:musopathy/screens/loginUi.dart';
-import 'package:musopathy/screens/videopage.dart';
+import 'package:musopathy/widgets/BUtton.dart';
 
 import 'package:musopathy/widgets/custom_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:connectivity/connectivity.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class WebViewExample extends StatefulWidget {
   @override
@@ -33,32 +33,21 @@ class WebViewExampleState extends State<WebViewExample> {
   }
 
   WebViewController _controller;
-  // final flutterWebviewPlugin = new FlutterWebviewPlugin();
+
   bool loggedin = false;
   String url =
       "https://player.vimeo.com/video/563210963?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479";
-  // Rect myRect = Rect.fromLTRB(5.0, 5.0, 5.0, 5.0);
+
   @override
   void initState() {
     super.initState();
-    check();
-  }
-
-  void check() async {
-    FirebaseAuth.instance.authStateChanges().listen((User user) {
-      if (user == null) {
-        print('User is currently signed out!');
-        loggedin = false;
-      } else {
-        print('User is signed in!');
-        loggedin = true;
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    //  print(loggedin);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     final Future<int> result = checkConnection();
     return SafeArea(
       child: Scaffold(
@@ -72,15 +61,17 @@ class WebViewExampleState extends State<WebViewExample> {
               iconSize: 30.0,
               color: Theme.of(context).primaryColor,
               onPressed: () => key.currentState.openDrawer()),
+          iconTheme: IconThemeData(color: Color.fromRGBO(40, 115, 161, 1.0)),
           centerTitle: true,
           backgroundColor: Colors.white,
           title: Text(
-            'MUSOPATHY',
+            'M U S O P A T H Y',
             style: TextStyle(
-              color: Colors.cyan,
               fontFamily: 'Ubuntu',
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Color.fromRGBO(40, 115, 161, 1.0),
+              fontWeight: FontWeight.normal,
+              //fontWeight: FontWeight.bold,
             ),
           ),
         ),
@@ -128,7 +119,7 @@ class WebViewExampleState extends State<WebViewExample> {
                         ],
                       );
                     } else {
-                      return CircularProgressIndicator();
+                      return Center(child: CircularProgressIndicator());
                     }
                   },
                 ),
@@ -141,11 +132,12 @@ class WebViewExampleState extends State<WebViewExample> {
                   style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
                 ),
               ),
-              SizedBox(
-                height: 20.0,
-              ),
-              GestureDetector(
-                onTap: () {
+              // SizedBox(
+              //   height: 20.0,
+              // ),
+              Button(
+                "SignUp/SignIn",
+                () {
                   _controller.clearCache();
                   // _controller1.pause();
                   if (Provider.of<Data>(context, listen: false).loggedin ==
@@ -162,56 +154,19 @@ class WebViewExampleState extends State<WebViewExample> {
                         MaterialPageRoute(builder: (_) => MyHomePage()));
                   }
                 },
-                child: new Container(
-                  margin: EdgeInsets.symmetric(horizontal: 70.0),
-                  alignment: Alignment
-                      .center, // on giving this the container got its size later
-                  height: 45.0,
-                  decoration: BoxDecoration(
-                    color: Colors.indigo.shade800,
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  child: new Text(
-                    "Join Us 😊", //without alignment the size is according to the text
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1.5,
-                    ),
-                  ),
-                ),
               ),
               SizedBox(
-                height: 20.0,
+                height: 2.0,
               ),
-              GestureDetector(
-                onTap: () async {
+              Button(
+                "Videos",
+                () async {
                   await _controller.clearCache();
 
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context, MaterialPageRoute(builder: (_) => Language()));
                 },
-                child: new Container(
-                  margin: EdgeInsets.symmetric(horizontal: 70.0),
-                  alignment: Alignment
-                      .center, // on giving this the container got its size later
-                  height: 45.0,
-                  decoration: BoxDecoration(
-                    color: Colors.orange.shade700,
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  child: new Text(
-                    "Videos", //without alignment the size is according to the text
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1.5,
-                    ),
-                  ),
-                ),
-              ),
+              )
             ],
           ),
         ),

@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:flutter/services.dart';
 import 'package:musopathy/screens/introPage2.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -9,6 +10,9 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -31,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'Covi Sup',
+                        'Covi Supp',
                         style: TextStyle(
                           fontFamily: 'Ubuntu',
                           color: Color(0xFFDFDFDF),
@@ -44,6 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         'Musopathy Tonation Breathing Techniques for Covid Symptoms, Anxiety & Depression ',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
@@ -73,6 +78,13 @@ class _SplashScreenState extends State<SplashScreen> {
                         decoration: BoxDecoration(
                           color: Colors.blue.shade100,
                           borderRadius: BorderRadius.circular(30.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(0.0, 1.0), //(x,y)
+                              blurRadius: 6.0,
+                            ),
+                          ],
                         ),
                         child: new Text(
                           "Start", //without alignment the size is according to the text
