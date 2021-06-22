@@ -32,7 +32,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
+      child: ListView(
         children: [
           Container(
             height: 200,
@@ -117,26 +117,24 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     ),
                   ),
           ),
-          Expanded(
-            child: Provider.of<Data>(context).loggedin == true
-                ? Align(
-                    alignment: FractionalOffset.bottomCenter,
-                    child: _buildDrawerOption("Log Out", () {
-                      Provider.of<Data>(context, listen: false).logout();
-                      FirebaseAuth.instance.signOut();
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => WebViewExample(),
-                        ),
-                      );
-                    }),
-                  )
-                : Container(
-                    height: 0,
-                    width: 0,
-                  ),
-          ),
+          Provider.of<Data>(context).loggedin == true
+              ? Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: _buildDrawerOption("Log Out", () {
+                    Provider.of<Data>(context, listen: false).logout();
+                    FirebaseAuth.instance.signOut();
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => WebViewExample(),
+                      ),
+                    );
+                  }),
+                )
+              : Container(
+                  height: 0,
+                  width: 0,
+                ),
         ],
       ),
     );

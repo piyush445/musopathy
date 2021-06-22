@@ -244,10 +244,6 @@ class _VideoPageState extends State<VideoPage> {
             },
           ),
         ),
-
-        // li = List.from(data['exercises']);
-        // Provider.of<Data>(context, listen: false).fetchVideos(li);
-
         previewChild: Container(
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
