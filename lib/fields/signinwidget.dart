@@ -234,7 +234,7 @@ class SignInwidget extends State<SignIn> {
                                   image: DecorationImage(
                                       image: AssetImage(
                                           "assets/images/google_logo.png"),
-                                      fit: BoxFit.fill),
+                                      fit: BoxFit.fitWidth),
                                 ),
                               ),
                             ),

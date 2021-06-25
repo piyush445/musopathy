@@ -54,15 +54,16 @@ class WebViewExampleState extends State<WebViewExample> {
         key: key,
         drawer: CustomDrawer(),
         appBar: AppBar(
-          elevation: 0,
-          bottomOpacity: 0.0,
-          leading: IconButton(
-              icon: Icon(Icons.menu),
-              iconSize: 30.0,
-              color: Theme.of(context).primaryColor,
-              onPressed: () => key.currentState.openDrawer()),
           iconTheme: IconThemeData(color: Color.fromRGBO(40, 115, 161, 1.0)),
-          centerTitle: true,
+          // elevation: 0,
+          // bottomOpacity: 0.0,
+          // leading: IconButton(
+          //     icon: Icon(Icons.menu),
+          //     iconSize: 30.0,
+          //     color: Theme.of(context).primaryColor,
+          //     onPressed: () => key.currentState.openDrawer()),
+          // iconTheme: IconThemeData(color: Color.fromRGBO(40, 115, 161, 1.0)),
+          // centerTitle: true,
           backgroundColor: Colors.white,
           title: Text(
             'M U S O P A T H Y',
@@ -74,6 +75,7 @@ class WebViewExampleState extends State<WebViewExample> {
               //fontWeight: FontWeight.bold,
             ),
           ),
+          elevation: 4,
         ),
         // drawer: Drawer(),
         body: SingleChildScrollView(
@@ -127,8 +129,8 @@ class WebViewExampleState extends State<WebViewExample> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  'The Musopathy breathing and tonation program uniquely combines - Breathing, Tonation and Phonation and gives triple benefits to participants in the most effortless manner.  It includes only the easiest techniques and simplifies even challenging ones.  It has benefited hundreds of Covid positive or rehab patients as well as healthy participants by improving lung, immunological, health and oxygen saturation and decreased stress, anxiety and depression.',
-                  textAlign: TextAlign.start,
+                  'Musopathy provides revolutionary tools for individual and organizational Health and Wellness like the Tonation Breathing Techniques (TBT) Program to manage Covid Symptoms, Anxiety and Depression. TBT is a specially evolved program that includes diverse non-strenuous Breathing techniques anchored on published studies by Harvard, Johns Hopkins etc. The special feature is the addition of Tonation through hostrils or lips to most techniques which has enabled hundreds to improve their lung, immunological and psychological health besides increasing focus energy, clarity, decision making abilities and decreasing stress and fatigue.',
+                  textAlign: TextAlign.justify,
                   style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
                 ),
               ),
@@ -142,6 +144,24 @@ class WebViewExampleState extends State<WebViewExample> {
                   // _controller1.pause();
                   if (Provider.of<Data>(context, listen: false).loggedin ==
                       true) {
+                    // return AlertDialog(
+                    //   title: const Text('Dear User'),
+                    //   content: SingleChildScrollView(
+                    //     child: ListBody(
+                    //       children: const <Widget>[
+                    //         Text('You are already logged in'),
+                    //       ],
+                    //     ),
+                    //   ),
+                    //   actions: <Widget>[
+                    //     TextButton(
+                    //       child: const Text('Okay'),
+                    //       onPressed: () {
+                    //         Navigator.of(context).pop();
+                    //       },
+                    //     ),
+                    //   ],
+                    // );
                     // final snackBar =
                     //     SnackBar(content: Text('You are already logged in!!!'));
 
@@ -149,6 +169,7 @@ class WebViewExampleState extends State<WebViewExample> {
                     Fluttertoast.showToast(
                         msg: "You are already loggedin",
                         toastLength: Toast.LENGTH_LONG);
+                    // }
                   } else {
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (_) => MyHomePage()));
@@ -159,10 +180,9 @@ class WebViewExampleState extends State<WebViewExample> {
                 height: 2.0,
               ),
               Button(
-                "Videos",
+                "Exercises",
                 () async {
                   await _controller.clearCache();
-
                   Navigator.pushReplacement(
                       context, MaterialPageRoute(builder: (_) => Language()));
                 },

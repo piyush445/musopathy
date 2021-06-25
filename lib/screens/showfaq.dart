@@ -83,22 +83,18 @@ class ShowFaq extends StatelessWidget {
       key: key1,
       drawer: CustomDrawer(),
       appBar: AppBar(
-        leading: IconButton(
-            icon: Icon(Icons.menu),
-            iconSize: 30.0,
-            color: Theme.of(context).primaryColor,
-            onPressed: () => key1.currentState.openDrawer()),
-        centerTitle: true,
+        iconTheme: IconThemeData(color: Color.fromRGBO(40, 115, 161, 1.0)),
         backgroundColor: Colors.white,
         title: Text(
-          'M U S O P A T H Y',
+          'F A Q s',
           style: TextStyle(
-            color: Color.fromRGBO(40, 115, 161, 1.0),
             fontFamily: 'Ubuntu',
             fontSize: 20,
+            color: Color.fromRGBO(40, 115, 161, 1.0),
             fontWeight: FontWeight.normal,
           ),
         ),
+        elevation: 4,
       ),
       body: ListView.builder(
         itemBuilder: (BuildContext context, int index) =>

@@ -19,17 +19,10 @@ class _ContactScreenState extends State<ContactScreen> {
     return Scaffold(
       key: key2,
       appBar: AppBar(
-        centerTitle: true,
-        leading: IconButton(
-            icon: Icon(Icons.menu),
-            iconSize: 30.0,
-            color: Theme.of(context).primaryColor,
-            onPressed: () => key2.currentState.openDrawer()),
         iconTheme: IconThemeData(color: Color.fromRGBO(40, 115, 161, 1.0)),
         backgroundColor: Colors.white,
-
         title: Text(
-          'M U S O P A T H Y',
+          'Contact Us',
           style: TextStyle(
             fontFamily: 'Ubuntu',
             fontSize: 20,
@@ -37,9 +30,6 @@ class _ContactScreenState extends State<ContactScreen> {
             fontWeight: FontWeight.normal,
           ),
         ),
-        //   actions: [],
-        //   centerTitle: true,
-        //   elevation: 4,
       ),
       drawer: CustomDrawer(),
       body: SafeArea(
@@ -65,10 +55,11 @@ class _ContactScreenState extends State<ContactScreen> {
                 child: Container(
                     height: 200,
                     width: MediaQuery.of(context).size.width,
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      elevation: 2,
+                    child: Container(
+                      // height: 300,
+                      //     width: 400,
+                      // shape: RoundedRectangleBorder(
+                      //     borderRadius: BorderRadius.circular(20)),
                       color: Colors.blue.shade50,
                       child: Padding(
                         padding: const EdgeInsets.all(10),

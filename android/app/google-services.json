@@ -14,11 +14,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "923404982232-n57u4dakjt2rgkec631cb85pupl7o8fe.apps.googleusercontent.com",
+          "client_id": "923404982232-okrfp9hglnv6s07dcun34rohom08dbf7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.musopathy",
             "certificate_hash": "8821c4ca11ee51c7a498f01e038086b37764700c"
+          }
+        },
+        {
+          "client_id": "923404982232-ol38s8cdutc9d0l6l3btj5sosiar4i13.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.musopathy",
+            "certificate_hash": "7cdc3a2792b4f8c8eb59d8532a0b9adec03cc764"
           }
         },
         {

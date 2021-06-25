@@ -47,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
-                        'Musopathy Tonation Breathing Techniques for Covid Symptoms, Anxiety & Depression ',
+                        'Tonation Breathing Techniques to \nCombat Covid & Other Conditions ',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 15,

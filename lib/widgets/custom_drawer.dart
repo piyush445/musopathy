@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:musopathy/models/data.dart';
 import 'package:musopathy/screens/MyAccount2.dart';
+import 'package:musopathy/screens/aboutUs.dart';
+import 'package:musopathy/screens/benefitstbt.dart';
 import 'package:musopathy/screens/contact.dart';
 import 'package:musopathy/screens/introPage2.dart';
 import 'package:musopathy/screens/languagePage.dart';
@@ -68,14 +70,21 @@ class _CustomDrawerState extends State<CustomDrawer> {
             );
           }),
           _buildDrawerOption(
-            "MusoPathy & TBt",
+            "Musopathy & TBT",
             () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (_) => Mtbtshow()),
             ),
           ),
           _buildDrawerOption(
-            "Videos",
+            "Benefits of TBT",
+            () => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => Benefits()),
+            ),
+          ),
+          _buildDrawerOption(
+            "Exercises",
             () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -102,35 +111,54 @@ class _CustomDrawerState extends State<CustomDrawer> {
             ),
           ),
           _buildDrawerOption(
-            "My Account",
-            () => Provider.of<Data>(context, listen: false).loggedin == true
-                ? Navigator.pushReplacement(
+            "About Us",
+            () => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => AboutUs(),
+              ),
+            ),
+          ),
+          // _buildDrawerOption(
+          //   "My Account",
+          //   () => Provider.of<Data>(context, listen: false).loggedin == true
+          //       ? Navigator.pushReplacement(
+          //           context,
+          //           MaterialPageRoute(
+          //             builder: (_) => MyAccount2(),
+          //           ),
+          //         )
+          //       : Navigator.pushReplacement(
+          //           context,
+          //           MaterialPageRoute(
+          //             builder: (_) => MyHomePage(),
+          //           ),
+          //         ),
+          // ),
+          Provider.of<Data>(context).loggedin == true
+              ? _buildDrawerOption("My Account", () {
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (_) => MyAccount2(),
                     ),
-                  )
-                : Navigator.pushReplacement(
+                  );
+                })
+              : Container(
+                  height: 0,
+                  width: 0,
+                ),
+          Provider.of<Data>(context).loggedin == true
+              ? _buildDrawerOption("LogOut", () {
+                  Provider.of<Data>(context, listen: false).logout();
+                  FirebaseAuth.instance.signOut();
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (_) => MyHomePage(),
                     ),
-                  ),
-          ),
-          Provider.of<Data>(context).loggedin == true
-              ? Align(
-                  alignment: FractionalOffset.bottomCenter,
-                  child: _buildDrawerOption("Log Out", () {
-                    Provider.of<Data>(context, listen: false).logout();
-                    FirebaseAuth.instance.signOut();
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => WebViewExample(),
-                      ),
-                    );
-                  }),
-                )
+                  );
+                })
               : Container(
                   height: 0,
                   width: 0,

@@ -31,16 +31,16 @@ class _PaymentState extends State<Payment> {
               iconTheme:
                   IconThemeData(color: Color.fromRGBO(40, 115, 161, 1.0)),
               backgroundColor: Colors.white,
-              centerTitle: true,
               title: Text(
                 'M U S O P A T H Y',
                 style: TextStyle(
-                  color: Color.fromRGBO(40, 115, 161, 1.0),
                   fontFamily: 'Ubuntu',
                   fontSize: 20,
+                  color: Color.fromRGBO(40, 115, 161, 1.0),
                   fontWeight: FontWeight.normal,
                 ),
               ),
+              elevation: 4,
             ),
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -131,11 +131,23 @@ class _PaymentState extends State<Payment> {
                             return AlertDialog(
                               title: Text('Precautions and Disclaimers'),
                               content: Text(
-                                  "This following sets out the terms and conditions on which you may use the content onbusiness-standard.com website, business-standard.com's mobile browser site, Business Standard instore Applications and other digital publishing services (www.smartinvestor.in, www.bshindi.com and www.bsmotoring,com) owned by Business Standard Private Limited, all the services herein will be referred to as Business Standard Content Services."),
+                                      """
+                                      PRECAUTIONS & DISCLAIMERS
+
+There are no known risks associated with the Musopathy Tonation Breathing Techniques (TBT) program.  It has been designed to be less strenuous than talking.   But please note and follow the PRECAUTIONS below carefully.
+
+Do not begin any exercises including the Musopathy techniques if you have high fever, difficulty breathing, chest pain or heart palpitations or new swelling in your legs.  
+Stop immediately if you develop dizziness, undue shortness of breath, chest pain, cool, clammy skin, fatigue, irregular heartbeat or any symptoms you consider an emergency. 
+Get emergency attention immediately if these symptoms don’t stop with rest or if you experience any change in physical or mental status from your normal capacity. 
+
+Musopathy Tonation Breathing Techniques (TBT) program is only a supplement to - and not a substitute for - standard clinical treatment for COVID-19 or any other condition. So do NOT stop your medication without your Doctor’s consent and always follow standard Covid safety guidelines of social distancing, appropriate masking, face and hand hygiene, vaccination etc.  
+
+                                      """
+                                  ),
                               actions: [
                                 TextButton(
                                   onPressed: () => Navigator.pop(context),
-                                  child: Text('Ok'),
+                                  child: Text('OK'),
                                 ),
                               ],
                             );

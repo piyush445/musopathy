@@ -53,21 +53,23 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             children: <Widget>[
               UpperUI(),
               TabBar(
-                indicatorColor: Colors.cyan.shade900,
+                indicatorColor: Color.fromRGBO(40, 115, 161, 1.0),
                 controller: tabcontroller,
                 tabs: [
                   Tab(
                     child: Text(
                       "Login",
-                      style:
-                          TextStyle(color: Colors.cyan.shade900, fontSize: 18),
+                      style: TextStyle(
+                          color: Color.fromRGBO(40, 115, 161, 1.0),
+                          fontSize: 18),
                     ),
                   ),
                   Tab(
                     child: Text(
                       "Register",
-                      style:
-                          TextStyle(color: Colors.cyan.shade900, fontSize: 18),
+                      style: TextStyle(
+                          color: Color.fromRGBO(40, 115, 161, 1.0),
+                          fontSize: 18),
                     ),
                   ),
                 ],
