@@ -139,6 +139,10 @@ class WebViewExampleState extends State<WebViewExample> {
               // ),
               Button(
                 "SignUp/SignIn",
+                //   style: TextStyle(fontSize: 20),
+                //   textAlign: TextAlign.center,
+                // ),
+
                 () {
                   _controller.clearCache();
                   // _controller1.pause();
@@ -181,6 +185,9 @@ class WebViewExampleState extends State<WebViewExample> {
               ),
               Button(
                 "Exercises",
+                // style: TextStyle(fontSize: 20),
+                // textAlign: TextAlign.center,
+
                 () async {
                   await _controller.clearCache();
                   Navigator.pushReplacement(

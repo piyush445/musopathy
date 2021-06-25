@@ -38,7 +38,7 @@ class AboutUs extends StatelessWidget {
         iconTheme: IconThemeData(color: Color.fromRGBO(40, 115, 161, 1.0)),
         backgroundColor: Colors.white,
         title: Text(
-          'A b o u t  U s',
+          'About Us',
           style: TextStyle(
             fontFamily: 'Ubuntu',
             fontSize: 20,

@@ -113,7 +113,7 @@ class Data extends ChangeNotifier {
         //  print(documentSnapshot.data());
         Map<dynamic, dynamic> map = Map.from(documentSnapshot.data());
         li = List.from(map['exercises']);
-        print(li[0]);
+        // print(li[0]);
       } else {
         print("not exist");
       }

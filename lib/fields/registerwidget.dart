@@ -174,17 +174,13 @@ class Registerwidget extends State<Register> {
                       context: context,
                       builder: (BuildContext context) {
                         return Expanded(
-                          child: AlertDialog(
-                            title: Text('Terms and Conditions'),
-                            content: Text(
-                                      """
-                                      MUSOPATHY COVI SUP APP 
-
-Terms and Conditions 
-
+                          child: SingleChildScrollView(
+                            child: AlertDialog(
+                              title: Text('Terms and Conditions'),
+                              content: Text("""
+MUSOPATHY COVI SUP APP 
 
 OVERVIEW
-
 
 This Website and App - hereafter referred to as “Content” or simply “Website” are presented by the Musopathy Foundation in collaboration with various partners. Throughout the site, the terms “we”, “us” and “our” refer to Musopathy Foundation. Musopathy Foundation offers this website, including all information, tools and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.
 
@@ -380,35 +376,26 @@ If our store is acquired or merged with another company, your information may be
 QUESTIONS AND CONTACT INFORMATION
 If you would like to: access, correct, amend or delete any personal information we have about you, register a complaint, or simply want more information contact our Privacy Compliance Officer at wellness@musopathy.com or by mail at Musopathy Foundation, 105, 2nd cross, VGP Layout, Palavakkam, Chennai 600041
  
- 
- 
- 
- 
- 
- 
 REFUND POLICY 
 
 Several types of goods are exempt from being returned including Downloadable software products and some health and personal care items like the Tonation Breathing Technique or other Musopathy Programs.  There are no known risks involved in these types of non-strenuous breathing programs especially if you carefully follow the precautions mentioned by us. 
 
 However, if you feel any physical discomfort and can prove that you had any complications solely because of the Musopathy programs within one week of payment, you will be entitled to a 100% refund of the amount you paid.
-
-
-
-                                      """
+"""),
+                              actions: [
+                                TextButton(
+                                  // textColor: Colors.black,
+                                  style: ButtonStyle(),
+                                  onPressed: () => Navigator.pop(context),
+                                  child: Text('OK'),
                                 ),
-                            actions: [
-                              TextButton(
-                                // textColor: Colors.black,
-                                style: ButtonStyle(),
-                                onPressed: () => Navigator.pop(context),
-                                child: Text('OK'),
-                              ),
-                              // TextButton(
-                              //   // textColor: Colors.black,
-                              //   onPressed: () => Navigator.pop(context),
-                              //   child: Text('ACCEPT'),
-                              // ),
-                            ],
+                                // TextButton(
+                                //   // textColor: Colors.black,
+                                //   onPressed: () => Navigator.pop(context),
+                                //   child: Text('ACCEPT'),
+                                // ),
+                              ],
+                            ),
                           ),
                         );
                       },

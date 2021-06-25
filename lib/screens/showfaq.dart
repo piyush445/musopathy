@@ -86,7 +86,7 @@ class ShowFaq extends StatelessWidget {
         iconTheme: IconThemeData(color: Color.fromRGBO(40, 115, 161, 1.0)),
         backgroundColor: Colors.white,
         title: Text(
-          'F A Q s',
+          'FAQs',
           style: TextStyle(
             fontFamily: 'Ubuntu',
             fontSize: 20,
@@ -99,6 +99,7 @@ class ShowFaq extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (BuildContext context, int index) =>
             EntryItem(data[index]),
+        // textAlign: TextAlign.justify,
         itemCount: data.length,
       ),
     );

@@ -59,7 +59,7 @@ class _ContactScreenState extends State<ContactScreen> {
                       // height: 300,
                       //     width: 400,
                       // shape: RoundedRectangleBorder(
-                      //     borderRadius: BorderRadius.circular(20)),
+                      //     borderRadius: BorderRadius.circular(15)),
                       color: Colors.blue.shade50,
                       child: Padding(
                         padding: const EdgeInsets.all(10),

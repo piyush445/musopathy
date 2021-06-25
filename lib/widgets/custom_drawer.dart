@@ -8,6 +8,7 @@ import 'package:musopathy/screens/introPage2.dart';
 import 'package:musopathy/screens/languagePage.dart';
 import 'package:musopathy/screens/loginUi.dart';
 import 'package:musopathy/screens/mtbtshow.dart';
+import 'package:musopathy/screens/payment.dart';
 import 'package:musopathy/screens/showfaq.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
@@ -47,15 +48,18 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 CircleAvatar(
                     child: Provider.of<Data>(context, listen: false).loggedin ==
                             true
-                        ? Text(Provider.of<Data>(context, listen: false)
-                            .userName[0])
+                        ? Text(
+                            Provider.of<Data>(context, listen: false)
+                                .userName[0],
+                            style: TextStyle(color: Colors.white, fontSize: 25),
+                          )
                         : Image(
                             width: double.infinity,
                             image: AssetImage("assets/images/muso.png"),
                             fit: BoxFit.cover,
                           )),
                 Text(
-                  "Musopathy",
+                  "M u s o p a t h y",
                   style: TextStyle(color: Colors.white, fontSize: 25),
                 )
               ],
@@ -141,6 +145,19 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     context,
                     MaterialPageRoute(
                       builder: (_) => MyAccount2(),
+                    ),
+                  );
+                })
+              : Container(
+                  height: 0,
+                  width: 0,
+                ),
+          Provider.of<Data>(context).loggedin == true
+              ? _buildDrawerOption("Payment", () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => Payment(),
                     ),
                   );
                 })

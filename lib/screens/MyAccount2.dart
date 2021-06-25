@@ -84,7 +84,7 @@ class _MyAccount2State extends State<MyAccount2> {
         child: Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            elevation: 4,
+            elevation: 1,
             // color: Colors.blue.shade50,
 
             child: Padding(
@@ -124,7 +124,7 @@ class _MyAccount2State extends State<MyAccount2> {
         child: Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            elevation: 4,
+            elevation: 1,
             // color: Colors.blue.shade50,
 
             child: Padding(
@@ -170,7 +170,7 @@ class _MyAccount2State extends State<MyAccount2> {
         child: Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            elevation: 4,
+            elevation: 1,
             // color: Colors.blue.shade50,
 
             child: Padding(
@@ -195,15 +195,10 @@ class _MyAccount2State extends State<MyAccount2> {
     return Scaffold(
         key: key3,
         appBar: AppBar(
-          leading: IconButton(
-              icon: Icon(Icons.menu),
-              iconSize: 30.0,
-              color: Theme.of(context).primaryColor,
-              onPressed: () => key3.currentState.openDrawer()),
           iconTheme: IconThemeData(color: Color.fromRGBO(40, 115, 161, 1.0)),
           backgroundColor: Colors.white,
           title: Text(
-            'M U S O P A T H Y',
+            'My Account',
             style: TextStyle(
               fontFamily: 'Ubuntu',
               fontSize: 20,
@@ -211,9 +206,7 @@ class _MyAccount2State extends State<MyAccount2> {
               fontWeight: FontWeight.normal,
             ),
           ),
-          //   actions: [],
-          //   centerTitle: true,
-          //   elevation: 4,
+          elevation: 4,
         ),
         drawer: CustomDrawer(),
         body: SafeArea(
@@ -238,7 +231,7 @@ class _MyAccount2State extends State<MyAccount2> {
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(10)),
-                                    elevation: 4,
+                                    elevation: 1,
                                     // color: Colors.blue.shade50,
 
                                     child: Padding(
@@ -269,7 +262,7 @@ class _MyAccount2State extends State<MyAccount2> {
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(10)),
-                                    elevation: 4,
+                                    elevation: 1,
                                     // color: Colors.blue.shade50,
 
                                     child: Padding(
@@ -341,7 +334,7 @@ class _MyAccount2State extends State<MyAccount2> {
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10)),
-                                            elevation: 4,
+                                            elevation: 1,
                                             // color: Colors.blue.shade50,
 
                                             child: Padding(
@@ -385,7 +378,7 @@ class _MyAccount2State extends State<MyAccount2> {
                             ],
                           ),
                           Container(
-                            width: MediaQuery.of(context).size.width / 1.15,
+                            width: double.infinity,
                             height: 55,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30)),

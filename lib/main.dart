@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:musopathy/models/data.dart';
 import 'package:musopathy/screens/Landingpage.dart';
+import 'package:musopathy/screens/payment.dart';
 
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
