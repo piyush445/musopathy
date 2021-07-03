@@ -1,3 +1,4 @@
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -20,14 +21,17 @@ class WebViewExample extends StatefulWidget {
 class WebViewExampleState extends State<WebViewExample> {
   final GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();
   Future<int> checkConnection() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile) {
-      // I am connected to a mobile network.
-      return 1;
-    } else if (connectivityResult == ConnectivityResult.wifi) {
-      // I am connected to a wifi network.
-      return 1;
-    }
+    // var connectivityResult = await (Connectivity().checkConnectivity());
+    // if (connectivityResult == ConnectivityResult.mobile) {
+    //   // I am connected to a mobile network.
+    //   return 1;
+    // } else if (connectivityResult == ConnectivityResult.wifi) {
+    //   // I am connected to a wifi network.
+    //   return 1;
+    // }
+    // return Future.error(
+    //     "This is the error", StackTrace.fromString("This is its trace"));
+    if (await DataConnectionChecker().hasConnection) return 1;
     return Future.error(
         "This is the error", StackTrace.fromString("This is its trace"));
   }

@@ -9,6 +9,8 @@ import 'package:provider/provider.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class Payment extends StatefulWidget {
+  int value;
+  Payment(this.value);
   @override
   _PaymentState createState() => _PaymentState();
 }
@@ -27,8 +29,17 @@ class _PaymentState extends State<Payment> {
       DeviceOrientation.portraitUp,
     ]);
     if (success == true) {
-      Provider.of<Data>(context, listen: false).updateUserPayment();
-      Provider.of<Data>(context, listen: false).updatePayment();
+      if (widget.value == -1) {
+        Provider.of<Data>(context, listen: false).updateUserPayment();
+        Provider.of<Data>(context, listen: false).updatePayment();
+      } else {
+        // Provider.of<Data>(context, listen: false)
+        //     .updatenUserPayment(widget.value);
+        Provider.of<Data>(context, listen: false).updatenPayment(widget.value);
+      }
+    }
+    if (widget.value != -1) {
+      amount = 60;
     }
     return SafeArea(
       child: Scaffold(
@@ -54,8 +65,7 @@ class _PaymentState extends State<Payment> {
               UpperUI(),
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: 70),
-                  child: (Provider.of<Data>(context, listen: false).paid ==
-                          true)
+                  child: (success == true)
                       //success == true
                       ? Icon(
                           Icons.check_circle_outline,
@@ -65,28 +75,55 @@ class _PaymentState extends State<Payment> {
                       : Container(
                           height: 150,
                           width: 300,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                "Unlock All Premium Content",
-                                style: TextStyle(
-                                  fontSize: 18,
+                          child: widget.value == -1
+                              ? Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      "Unlock All Premium Content",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    Text(
+                                      "One Time Payment",
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                      ),
+                                    ),
+                                    Text(
+                                      "₹ 300",
+                                      style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                )
+                              : Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      "Unlock ${Provider.of<Data>(context, listen: false).nli[widget.value]["name"]}",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    Text(
+                                      "One Time Payment",
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                      ),
+                                    ),
+                                    Text(
+                                      "₹ 60",
+                                      style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              Text(
-                                "One Time Payment",
-                                style: TextStyle(
-                                  fontSize: 22,
-                                ),
-                              ),
-                              Text(
-                                "₹ 300",
-                                style: TextStyle(
-                                    fontSize: 30, fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
                           decoration: BoxDecoration(
                             color: Colors.blue.shade50,
                             borderRadius: BorderRadius.circular(15),
@@ -101,9 +138,7 @@ class _PaymentState extends State<Payment> {
                       BoxDecoration(borderRadius: BorderRadius.circular(30)),
                   child: ElevatedButton(
                     onPressed: () {
-                      if (success == true ||
-                          (Provider.of<Data>(context, listen: false).paid ==
-                              true)) {
+                      if (success == true) {
                         // Provider.of<Data>(context, listen: false)
                         //     .updateUserPayment();
                         // Provider.of<Data>(context, listen: false)
@@ -115,9 +150,7 @@ class _PaymentState extends State<Payment> {
                         openCheckout();
                       }
                     },
-                    child: success == true ||
-                            (Provider.of<Data>(context, listen: false).paid ==
-                                true)
+                    child: success == true
                         ? Text(
                             "Back",
                             textAlign: TextAlign.center,

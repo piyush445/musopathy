@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:musopathy/models/data.dart';
@@ -26,6 +27,7 @@ class _MyAccount2State extends State<MyAccount2> {
   String gender = "male";
   String phn = "";
   String country = "";
+  String cc = "+91";
   void handleRadioValueChanged(int value) {
     setState(() {
       radioValue = value;
@@ -65,6 +67,7 @@ class _MyAccount2State extends State<MyAccount2> {
     if (_isEditingdob)
       return Center(
         child: TextField(
+          keyboardType: TextInputType.datetime,
           onChanged: (newValue) {
             dob = newValue;
           },
@@ -105,6 +108,7 @@ class _MyAccount2State extends State<MyAccount2> {
     if (_isEditingphn)
       return Center(
         child: TextField(
+          keyboardType: TextInputType.number,
           onChanged: (newValue) {
             phn = newValue;
           },
@@ -145,6 +149,7 @@ class _MyAccount2State extends State<MyAccount2> {
     if (_isEditingcountry)
       return Center(
         child: TextField(
+          keyboardType: TextInputType.name,
           onChanged: (newValue) {
             // setState(() {
             //   country = newValue;
@@ -192,6 +197,7 @@ class _MyAccount2State extends State<MyAccount2> {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
+    // cc = Provider.of<Data>(context).cc;
     return Scaffold(
         key: key3,
         appBar: AppBar(
@@ -217,7 +223,7 @@ class _MyAccount2State extends State<MyAccount2> {
                     height: MediaQuery.of(context).size.height,
                     child: Column(
                         // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        //  mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Column(
@@ -251,6 +257,9 @@ class _MyAccount2State extends State<MyAccount2> {
                               )
                             ],
                           ),
+                          SizedBox(
+                            height: 20,
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -281,6 +290,9 @@ class _MyAccount2State extends State<MyAccount2> {
                                     )),
                               )
                             ],
+                          ),
+                          SizedBox(
+                            height: 20,
                           ),
                           Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -356,6 +368,9 @@ class _MyAccount2State extends State<MyAccount2> {
                                             )),
                                       ),
                               ]),
+                          SizedBox(
+                            height: 20,
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -363,12 +378,44 @@ class _MyAccount2State extends State<MyAccount2> {
                               _editdobTextField()
                             ],
                           ),
+                          SizedBox(
+                            height: 20,
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               ShowText("PhoneNo"),
-                              _editphnTextField()
+                              Row(
+                                children: [
+                                  CountryCodePicker(
+                                    onChanged: (val) {
+                                      cc = val.toString();
+                                      print(cc);
+                                    },
+                                    // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                                    initialSelection: Provider.of<Data>(context,
+                                                    listen: false)
+                                                .cc ==
+                                            null
+                                        ? cc
+                                        : Provider.of<Data>(context).cc,
+                                    favorite: ['+91', 'भारत'],
+                                    // optional. Shows only country name and flag
+                                    showCountryOnly: false,
+                                    // optional. Shows only country name and flag when popup is closed.
+                                    showOnlyCountryWhenClosed: false,
+                                    // optional. aligns the flag and the Text left
+                                    alignLeft: false,
+                                  ),
+                                  Expanded(
+                                    child: _editphnTextField(),
+                                  )
+                                ],
+                              )
                             ],
+                          ),
+                          SizedBox(
+                            height: 20,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -376,6 +423,9 @@ class _MyAccount2State extends State<MyAccount2> {
                               ShowText("country"),
                               _editcountryTextField()
                             ],
+                          ),
+                          SizedBox(
+                            height: 20,
                           ),
                           Container(
                             width: double.infinity,
@@ -386,7 +436,7 @@ class _MyAccount2State extends State<MyAccount2> {
                               onPressed: () async {
                                 Provider.of<Data>(context, listen: false)
                                     .updateUserDetails(
-                                        gender, dob, country, phn);
+                                        gender, dob, country, phn, cc);
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(

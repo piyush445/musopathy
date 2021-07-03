@@ -10,6 +10,7 @@ import 'package:musopathy/screens/loginUi.dart';
 import 'package:musopathy/screens/mtbtshow.dart';
 import 'package:musopathy/screens/payment.dart';
 import 'package:musopathy/screens/showfaq.dart';
+import 'package:musopathy/screens/AnotherVideos.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -96,6 +97,15 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
             ),
           ),
+          _buildDrawerOption("Another Videos", () async {
+            //   Provider.of<Data>(context, listen: false).getnVideos();
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => Special(),
+              ),
+            );
+          }),
           _buildDrawerOption(
             "FAQs",
             () => Navigator.pushReplacement(
@@ -114,15 +124,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
             ),
           ),
-          _buildDrawerOption(
-            "About Us",
-            () => Navigator.pushReplacement(
+          _buildDrawerOption("About Us", () {
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (_) => AboutUs(),
               ),
-            ),
-          ),
+            );
+          }),
           // _buildDrawerOption(
           //   "My Account",
           //   () => Provider.of<Data>(context, listen: false).loggedin == true
@@ -152,19 +161,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   height: 0,
                   width: 0,
                 ),
-          Provider.of<Data>(context).loggedin == true
-              ? _buildDrawerOption("Payment", () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => Payment(),
-                    ),
-                  );
-                })
-              : Container(
-                  height: 0,
-                  width: 0,
-                ),
+
           Provider.of<Data>(context).loggedin == true
               ? _buildDrawerOption("LogOut", () {
                   Provider.of<Data>(context, listen: false).logout();

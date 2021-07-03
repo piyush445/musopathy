@@ -10,9 +10,20 @@ class AddUser {
   final String gender;
   final String country;
   final bool added;
+  final List nexercises;
 
-  AddUser(this.fullName, this.paid, this.phn, this.email, this.photourl,
-      this.dob, this.gender, this.country, this.added);
+  AddUser(
+    this.fullName,
+    this.paid,
+    this.phn,
+    this.email,
+    this.photourl,
+    this.dob,
+    this.gender,
+    this.country,
+    this.added,
+    this.nexercises,
+  );
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
@@ -28,7 +39,9 @@ class AddUser {
             "photourl": photourl,
             "dob": dob,
             "gender": gender,
-            "country": country
+            "country": country,
+            "npaid": nexercises,
+            "cc": "+91"
           })
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));

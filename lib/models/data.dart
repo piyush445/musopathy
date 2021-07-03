@@ -8,6 +8,9 @@ class Data extends ChangeNotifier {
   String currentname;
   String currentUrl;
   String currentdesc;
+  String currentnname;
+  String currentnUrl;
+  String currentndesc;
   String email;
   String userName;
   String photourl;
@@ -17,9 +20,11 @@ class Data extends ChangeNotifier {
   String country;
   String dob;
   String gender;
-
+  List npaid;
   List li;
+  List nli;
   Map account = {};
+  String cc;
 
   final _auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -47,6 +52,9 @@ class Data extends ChangeNotifier {
             gender = account["gender"];
             dob = account["dob"];
             country = account["country"];
+            npaid = List.from(account["npaid"]);
+            cc = account["cc"];
+            //print(npaid);
           } else {
             print("not exist");
           }
@@ -72,6 +80,11 @@ class Data extends ChangeNotifier {
     notifyListeners();
   }
 
+  void fetchnVideos(List videos) {
+    nli = videos;
+    notifyListeners();
+  }
+
   void updateCurrentDetails(int index) {
     if (language == "english") {
       currentUrl = li[index]["elink"];
@@ -82,6 +95,14 @@ class Data extends ChangeNotifier {
       currentname = li[index]["tname"];
       currentdesc = li[index]["description"];
     }
+    notifyListeners();
+  }
+
+  void updateCurrentnDetails(int index) {
+    currentnUrl = nli[index]["elink"];
+    currentnname = nli[index]["name"];
+    currentndesc = nli[index]["description"];
+
     notifyListeners();
   }
 
@@ -101,6 +122,25 @@ class Data extends ChangeNotifier {
   void updatePayment() {
     paid = true;
     notifyListeners();
+  }
+
+  Future<void> updatenPayment(int index) {
+    var lst = [];
+    for (int i = 0; i < nli.length; i++) {
+      if (i < npaid.length) {
+        lst.add(npaid[i]);
+      } else {
+        lst.add(false);
+      }
+    }
+    lst[index] = true;
+    npaid = lst;
+    return users
+        .doc(email)
+        .update({"npaid": lst})
+        .then((value) => print("User Updated"))
+        .catchError((error) => print("Failed to update user: $error"));
+    // notifyListeners();
   }
 
   void getVideos(String l) async {
@@ -132,14 +172,40 @@ class Data extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateUserDetails(String g, String d, String co, String p) {
+  void getnVideos() async {
+    await firestore
+        .collection('users')
+        .doc("special")
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        //  print(documentSnapshot.data());
+        Map<dynamic, dynamic> map = Map.from(documentSnapshot.data());
+        nli = List.from(map['nexercises']);
+        // print(li[0]);
+      } else {
+        print("not exist");
+      }
+    });
+
+    currentnname = nli[0]['name'];
+    currentnUrl = nli[0]["elink"];
+
+    currentndesc = nli[0]["description"];
+
+    notifyListeners();
+  }
+
+  Future<void> updateUserDetails(
+      String g, String d, String co, String p, String c) {
     if (g == "" || g == null) g = gender;
     if (d == "" || d == null) d = dob;
     if (co == "" || co == null) co = country;
     if (p == "" || p == null) p = phn;
+    if (c == "" || c == null) c = cc;
     return users
         .doc(email)
-        .update({"gender": g, "dob": d, "country": co, "phoneno": p})
+        .update({"gender": g, "dob": d, "country": co, "phoneno": p, "cc": c})
         .then((value) => print("User Updated"))
         .catchError((error) => print("Failed to update user: $error"));
   }

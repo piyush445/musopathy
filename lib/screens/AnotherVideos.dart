@@ -1,28 +1,20 @@
-import 'package:data_connection_checker/data_connection_checker.dart';
-import "package:flutter/material.dart";
 import 'package:draggable_bottom_sheet/draggable_bottom_sheet.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:flutter/material.dart';
 import 'package:musopathy/models/data.dart';
 import 'package:musopathy/screens/loginUi.dart';
-
 import 'package:musopathy/screens/payment.dart';
-
 import 'package:musopathy/widgets/custom_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
 
-import 'package:connectivity/connectivity.dart';
-
-FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-class VideoPage extends StatefulWidget {
+class Special extends StatefulWidget {
   @override
-  _VideoPageState createState() => _VideoPageState();
+  _SpecialState createState() => _SpecialState();
 }
 
-class _VideoPageState extends State<VideoPage> {
-  ScrollController scrollController;
+class _SpecialState extends State<Special> {
+  // bool isLoading = true;
   Future<int> checkConnection() async {
     // var connectivityResult = await (Connectivity().checkConnectivity());
     // if (connectivityResult == ConnectivityResult.mobile) {
@@ -42,14 +34,6 @@ class _VideoPageState extends State<VideoPage> {
   WebViewController _controller;
   // final flutterWebviewPlugin = new FlutterWebviewPlugin();
   final GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();
-
-  List li;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     final Future<int> result = checkConnection();
@@ -82,9 +66,9 @@ class _VideoPageState extends State<VideoPage> {
                 future: result, // a previously-obtained Future<String> or null
                 builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                   if (snapshot.hasData &&
-                      Provider.of<Data>(context).currentUrl != null) {
+                      Provider.of<Data>(context).currentnUrl != null) {
                     return WebView(
-                        initialUrl: Provider.of<Data>(context).currentUrl,
+                        initialUrl: Provider.of<Data>(context).currentnUrl,
                         javascriptMode: JavascriptMode.unrestricted,
                         onWebViewCreated: (WebViewController c) {
                           _controller = c;
@@ -123,9 +107,9 @@ class _VideoPageState extends State<VideoPage> {
               padding: const EdgeInsets.all(20.0),
               child: Text(
                 // Provider.of<Data>(context, listen: false).name,
-                Provider.of<Data>(context).currentname == null
+                Provider.of<Data>(context).currentnname == null
                     ? "loading.."
-                    : Provider.of<Data>(context).currentname,
+                    : Provider.of<Data>(context).currentnname,
                 style: TextStyle(
                   fontFamily: 'Ubuntu',
                   color: Colors.black,
@@ -137,9 +121,9 @@ class _VideoPageState extends State<VideoPage> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text(
-                Provider.of<Data>(context).currentdesc == null
+                Provider.of<Data>(context, listen: false).currentndesc == null
                     ? "loading.."
-                    : Provider.of<Data>(context).currentdesc,
+                    : Provider.of<Data>(context).currentndesc,
                 style: TextStyle(
                   fontFamily: 'Ubuntu',
                   color: Color(0xFFDFDFDF),
@@ -158,25 +142,23 @@ class _VideoPageState extends State<VideoPage> {
               FutureBuilder<int>(
             future: result, // a previously-obtained Future<String> or null
             builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-              if (snapshot.hasData && Provider.of<Data>(context).li != null) {
+              if (snapshot.hasData && Provider.of<Data>(context).nli != null) {
                 return Scaffold(
                     body: ListView.builder(
                   itemBuilder: (BuildContext context, int index) {
                     return Card(
                         color: Colors.white,
                         child: ListTile(
-                          trailing: (index > 0 && index < 8) &&
-                                  (Provider.of<Data>(context).loggedin ==
-                                          false ||
-                                      Provider.of<Data>(
-                                            context,
-                                          ).paid ==
+                          trailing:
+                              (Provider.of<Data>(context).loggedin == false ||
+                                      Provider.of<Data>(context, listen: false)
+                                              .npaid[index] ==
                                           false)
-                              ? Icon(
-                                  Icons.lock,
-                                  color: Colors.black,
-                                )
-                              : null,
+                                  ? Icon(
+                                      Icons.lock,
+                                      color: Colors.black,
+                                    )
+                                  : null,
                           leading: CircleAvatar(
                             backgroundColor: Colors.white,
                             child: Text(
@@ -186,52 +168,43 @@ class _VideoPageState extends State<VideoPage> {
                             ),
                           ),
                           title: Text(
-                            Provider.of<Data>(context).li[index]["name"],
+                            Provider.of<Data>(context).nli[index]["name"],
                             style: TextStyle(
                                 color: Color.fromRGBO(40, 115, 161, 1.0)),
                           ),
                           subtitle: Text(
                               Provider.of<Data>(context, listen: false)
-                                  .li[index]["description"]),
+                                  .nli[index]["description"]),
                           onTap: () {
-                            if ((index > 0 && index < 8)) {
-                              if ((Provider.of<Data>(context, listen: false)
-                                          .loggedin ==
-                                      true) &&
-                                  Provider.of<Data>(context, listen: false)
-                                      .paid) {
-                                //  initial(link, newname, Provider.of<Data>(context,listen: false).li[index]["description"]);
+                            if ((Provider.of<Data>(context, listen: false)
+                                        .loggedin ==
+                                    true) &&
                                 Provider.of<Data>(context, listen: false)
-                                    .updateCurrentDetails(index);
-                                _controller.loadUrl(
-                                    Provider.of<Data>(context, listen: false)
-                                        .currentUrl);
-                              } else if (Provider.of<Data>(context,
-                                          listen: false)
-                                      .loggedin ==
-                                  true) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => Payment(-1)));
-                              } else {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => MyHomePage()));
-                              }
-                            } else {
+                                    .npaid[index]) {
+                              //  initial(link, newname, Provider.of<Data>(context,listen: false).li[index]["description"]);
                               Provider.of<Data>(context, listen: false)
-                                  .updateCurrentDetails(index);
+                                  .updateCurrentnDetails(index);
                               _controller.loadUrl(
                                   Provider.of<Data>(context, listen: false)
-                                      .currentUrl);
+                                      .currentnUrl);
+                            } else if (Provider.of<Data>(context, listen: false)
+                                    .loggedin ==
+                                true) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => Payment(index)));
+                            } else {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => MyHomePage()));
                             }
                           },
                         ));
                   },
                   itemCount:
-                      Provider.of<Data>(context, listen: false).li.length,
+                      Provider.of<Data>(context, listen: false).nli.length,
                 ));
               }
 

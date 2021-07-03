@@ -139,15 +139,17 @@ class Registerwidget extends State<Register> {
                         Provider.of<Data>(context, listen: false).login();
 
                         var user = AddUser(
-                            _username.text,
-                            false,
-                            null,
-                            newUser.user.email,
-                            newUser.user.photoURL,
-                            null,
-                            null,
-                            null,
-                            false);
+                          _username.text,
+                          false,
+                          null,
+                          newUser.user.email,
+                          newUser.user.photoURL,
+                          null,
+                          null,
+                          null,
+                          false,
+                          [false, false, false, false, false, false, false],
+                        );
                         user.addUser();
                         // Provider.of<Data>(context, listen: false).verify();
                         Fluttertoast.showToast(

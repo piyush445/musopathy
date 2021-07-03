@@ -48,16 +48,19 @@ class SignInwidget extends State<SignIn> {
           added = true;
         else
           added = false;
+
         var user = AddUser(
-            authresult.user.displayName,
-            false,
-            null,
-            authresult.user.email,
-            authresult.user.photoURL,
-            null,
-            null,
-            null,
-            added);
+          authresult.user.displayName,
+          false,
+          null,
+          authresult.user.email,
+          authresult.user.photoURL,
+          null,
+          null,
+          null,
+          added,
+          [false, false, false, false, false, false, false],
+        );
         user.addUser();
         // Provider.of<Data>(context, listen: false).verify();
         Navigator.pushReplacement(

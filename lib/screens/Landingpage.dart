@@ -27,9 +27,10 @@ class _LandingPageState extends State<LandingPage> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       if (_currentuser == null) {
         Provider.of<Data>(context, listen: false).logout();
+        Provider.of<Data>(context, listen: false).getnVideos();
       } else {
         Provider.of<Data>(context, listen: false).verify();
-
+        Provider.of<Data>(context, listen: false).getnVideos();
         Provider.of<Data>(context, listen: false).login();
       }
     });
