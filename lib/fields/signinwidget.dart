@@ -17,7 +17,7 @@ class SignIn extends StatefulWidget {
 class SignInwidget extends State<SignIn> {
   bool added;
   final _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = new GoogleSignIn();
+  //final GoogleSignIn _googleSignIn = new GoogleSignIn();
   // bool forgetpwd = false;
 
   Future<UserCredential> signInWithGoogle() async {
@@ -59,7 +59,7 @@ class SignInwidget extends State<SignIn> {
           null,
           null,
           added,
-          [false, false, false, false, false, false, false],
+          [true, false, false, false, false, false, false, false],
         );
         user.addUser();
         // Provider.of<Data>(context, listen: false).verify();

@@ -5,8 +5,7 @@ import 'package:musopathy/widgets/custom_drawer.dart';
 
 class Benefits extends StatelessWidget {
   final List<Mtbt> data = [
-    Mtbt(
-        """
+    Mtbt("""
 In the TBT program, inhalation is never sudden, vigorous or very deep. 
 1. In most TBT steps, there is no holding of breath involved. 
 2. The focus is on controlled exhalation but again based on personal comfort but with the addition of tonation of single frequencies (not dynamic music). 
@@ -15,9 +14,7 @@ In the TBT program, inhalation is never sudden, vigorous or very deep.
 5. Those practising the Musopathy controlled tonation have cleared their respiratory pathways through this self-created vibration in their nasal and throat regions. 
 6. Further, nasal tonation has been proved to increase the Nitric Oxide content among participants which has multiple other benefits including vasodilation, improved memory and muscular systems. 
 7. Musopathy TBT has also enabled people to combat stress, anxiety, depression and fatigue and increased focus, energy, clarity and decision making abilities.
-        """
-        ,
-        Colors.white),
+        """, Colors.white),
 
     // Mtbt(, c),
     // Mtbt(text, c),

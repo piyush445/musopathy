@@ -4,14 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:musopathy/models/data.dart';
 
-import 'package:musopathy/screens/languagePage.dart';
 import 'package:musopathy/screens/loginUi.dart';
 import 'package:musopathy/widgets/BUtton.dart';
 
 import 'package:musopathy/widgets/custom_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:connectivity/connectivity.dart';
 
 class WebViewExample extends StatefulWidget {
   @override

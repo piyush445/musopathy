@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:musopathy/models/data.dart';
-import 'package:musopathy/screens/Landingpage.dart';
+import 'package:musopathy/screens/AnotherVideos.dart';
+
+import 'package:musopathy/screens/videopage.dart';
 import 'package:musopathy/widgets/custom_drawer.dart';
 import 'package:musopathy/widgets/upperUI.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +38,7 @@ class _PaymentState extends State<Payment> {
         // Provider.of<Data>(context, listen: false)
         //     .updatenUserPayment(widget.value);
         Provider.of<Data>(context, listen: false).updatenPayment(widget.value);
+        Provider.of<Data>(context, listen: false).updaten(widget.value);
       }
     }
     if (widget.value != -1) {
@@ -144,8 +147,12 @@ class _PaymentState extends State<Payment> {
                         // Provider.of<Data>(context, listen: false)
                         //     .updatePayment();
                         // Provider.of<Data>(context, listen: false).verify();
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (_) => LandingPage()));
+                        if (widget.value == -1)
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (_) => VideoPage()));
+                        else
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (_) => Special()));
                       } else {
                         openCheckout();
                       }

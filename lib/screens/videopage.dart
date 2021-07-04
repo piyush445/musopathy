@@ -12,8 +12,6 @@ import 'package:musopathy/widgets/custom_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import 'package:connectivity/connectivity.dart';
-
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 class VideoPage extends StatefulWidget {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:musopathy/models/data.dart';
-import 'package:musopathy/screens/contact.dart';
+
 import 'package:musopathy/screens/videopage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:musopathy/widgets/custom_drawer.dart';

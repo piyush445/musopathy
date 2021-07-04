@@ -145,16 +145,17 @@ class _SpecialState extends State<Special> {
                     return Card(
                         color: Colors.white,
                         child: ListTile(
-                          trailing:
-                              (Provider.of<Data>(context).loggedin == false ||
+                          trailing: (index > 0) &&
+                                  (Provider.of<Data>(context).loggedin ==
+                                          false ||
                                       Provider.of<Data>(context, listen: false)
                                               .npaid[index] ==
                                           false)
-                                  ? Icon(
-                                      Icons.lock,
-                                      color: Colors.black,
-                                    )
-                                  : null,
+                              ? Icon(
+                                  Icons.lock,
+                                  color: Colors.black,
+                                )
+                              : null,
                           leading: CircleAvatar(
                             backgroundColor: Colors.white,
                             child: Text(
@@ -177,7 +178,6 @@ class _SpecialState extends State<Special> {
                                     true) &&
                                 Provider.of<Data>(context, listen: false)
                                     .npaid[index]) {
-                              //  initial(link, newname, Provider.of<Data>(context,listen: false).li[index]["description"]);
                               Provider.of<Data>(context, listen: false)
                                   .updateCurrentnDetails(index);
                               _controller.loadUrl(

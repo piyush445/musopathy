@@ -148,7 +148,16 @@ class Registerwidget extends State<Register> {
                           null,
                           null,
                           false,
-                          [false, false, false, false, false, false, false],
+                          [
+                            true,
+                            false,
+                            false,
+                            false,
+                            false,
+                            false,
+                            false,
+                            false,
+                          ],
                         );
                         user.addUser();
                         // Provider.of<Data>(context, listen: false).verify();

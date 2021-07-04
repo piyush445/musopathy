@@ -124,6 +124,11 @@ class Data extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updaten(int index) {
+    npaid[index] = true;
+    notifyListeners();
+  }
+
   Future<void> updatenPayment(int index) {
     var lst = [];
     for (int i = 0; i < nli.length; i++) {

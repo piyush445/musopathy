@@ -22,8 +22,8 @@ class _MyAccount2State extends State<MyAccount2> {
   bool _isEditingphn = false;
   TextEditingController _phnController;
 
-  bool _isEditingcountry = false;
-  TextEditingController _countryController;
+  // bool _isEditingcountry = false;
+  // TextEditingController _countryController;
 
   int radioValue = 0;
   String dob = "";
@@ -63,7 +63,7 @@ class _MyAccount2State extends State<MyAccount2> {
     _dobController = TextEditingController(text: dob);
 
     _phnController = TextEditingController(text: phn);
-    _countryController = TextEditingController(text: country);
+    // _countryController = TextEditingController(text: country);
   }
 
   Widget _editdobTextField() {
@@ -148,52 +148,52 @@ class _MyAccount2State extends State<MyAccount2> {
     );
   }
 
-  Widget _editcountryTextField() {
-    if (_isEditingcountry)
-      return Center(
-        child: TextField(
-          keyboardType: TextInputType.name,
-          onChanged: (newValue) {
-            // setState(() {
-            //   country = newValue;
-            //   _isEditingcountry = false;
-            // });
-            country = newValue;
-            print(country);
-          },
-          autofocus: true,
-          controller: _countryController,
-        ),
-      );
+  // Widget _editcountryTextField() {
+  //   if (_isEditingcountry)
+  //     return Center(
+  //       child: TextField(
+  //         keyboardType: TextInputType.name,
+  //         onChanged: (newValue) {
+  //           // setState(() {
+  //           //   country = newValue;
+  //           //   _isEditingcountry = false;
+  //           // });
+  //           country = newValue;
+  //           print(country);
+  //         },
+  //         autofocus: true,
+  //         controller: _countryController,
+  //       ),
+  //     );
 
-    return InkWell(
-      onTap: () {
-        setState(() {
-          _isEditingcountry = true;
-        });
-      },
-      child: Container(
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        child: Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            elevation: 1,
-            // color: Colors.blue.shade50,
+  //   return InkWell(
+  //     onTap: () {
+  //       setState(() {
+  //         _isEditingcountry = true;
+  //       });
+  //     },
+  //     child: Container(
+  //       height: 50,
+  //       width: MediaQuery.of(context).size.width,
+  //       child: Card(
+  //           shape:
+  //               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+  //           elevation: 1,
+  //           // color: Colors.blue.shade50,
 
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-              child: Text(
-                //Provider.ofdsfs
-                Provider.of<Data>(context, listen: false).country ?? country,
-                textAlign: TextAlign.left,
-                style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
-              ),
-            )),
-      ),
-    );
-  }
+  //           child: Padding(
+  //             padding:
+  //                 const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+  //             child: Text(
+  //               //Provider.ofdsfs
+  //               Provider.of<Data>(context, listen: false).country ?? country,
+  //               textAlign: TextAlign.left,
+  //               style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
+  //             ),
+  //           )),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
