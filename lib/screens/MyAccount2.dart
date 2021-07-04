@@ -1,10 +1,13 @@
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:musopathy/models/data.dart';
 import 'package:musopathy/screens/Landingpage.dart';
 import 'package:musopathy/widgets/custom_drawer.dart';
 import 'package:provider/provider.dart';
+
+import 'loginUi.dart';
 
 class MyAccount2 extends StatefulWidget {
   @override
@@ -417,41 +420,77 @@ class _MyAccount2State extends State<MyAccount2> {
                           SizedBox(
                             height: 20,
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ShowText("country"),
-                              _editcountryTextField()
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            width: double.infinity,
-                            height: 55,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30)),
-                            child: ElevatedButton(
-                              onPressed: () async {
-                                Provider.of<Data>(context, listen: false)
-                                    .updateUserDetails(
-                                        gender, dob, country, phn, cc);
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => LandingPage()),
-                                );
-                              },
-                              child: Text(
-                                "Save",
-                                textAlign: TextAlign.center,
+                          // Column(
+                          //   crossAxisAlignment: CrossAxisAlignment.start,
+                          //   children: [
+                          //     ShowText("country"),
+                          //     _editcountryTextField()
+                          //   ],
+                          // ),
+                          // SizedBox(
+                          //   height: 20,
+                          // ),
+                          Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Container(
+                                width: double.infinity,
+                                height: 55,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30)),
+                                child: ElevatedButton(
+                                  onPressed: () async {
+                                    Provider.of<Data>(context, listen: false)
+                                        .updateUserDetails(
+                                            gender, dob, country, phn, cc);
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => LandingPage()),
+                                    );
+                                  },
+                                  child: Text(
+                                    "Save",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      primary:
+                                          Color.fromRGBO(40, 115, 161, 1.0),
+                                      onPrimary: Colors.white),
+                                ),
+                              )),
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Container(
+                              width: double.infinity,
+                              height: 55,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  Provider.of<Data>(context, listen: false)
+                                      .logout();
+                                  FirebaseAuth.instance.signOut();
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => MyHomePage(),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  "Logout",
+                                  textAlign: TextAlign.center,
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    primary: Color.fromRGBO(128, 0, 32, 1.0),
+                                    onPrimary: Colors.white),
                               ),
-                              style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)),
-                                  primary: Color.fromRGBO(40, 115, 161, 1.0),
-                                  onPrimary: Colors.white),
                             ),
                           ),
                         ])))));

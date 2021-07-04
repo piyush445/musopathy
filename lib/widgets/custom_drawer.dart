@@ -74,20 +74,20 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
             );
           }),
-          _buildDrawerOption(
-            "Musopathy & TBT",
-            () => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (_) => Mtbtshow()),
-            ),
-          ),
-          _buildDrawerOption(
-            "Benefits of TBT",
-            () => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (_) => Benefits()),
-            ),
-          ),
+          // _buildDrawerOption(
+          //   "Musopathy & TBT",
+          //   () => Navigator.pushReplacement(
+          //     context,
+          //     MaterialPageRoute(builder: (_) => Mtbtshow()),
+          //   ),
+          // ),
+          // _buildDrawerOption(
+          //   "Benefits of TBT",
+          //   () => Navigator.pushReplacement(
+          //     context,
+          //     MaterialPageRoute(builder: (_) => Benefits()),
+          //   ),
+          // ),
           _buildDrawerOption(
             "Exercises",
             () => Navigator.pushReplacement(
@@ -97,7 +97,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
             ),
           ),
-          _buildDrawerOption("Another Videos", () async {
+          _buildDrawerOption("Wellness Solutions", () async {
             //   Provider.of<Data>(context, listen: false).getnVideos();
             Navigator.pushReplacement(
               context,
@@ -124,7 +124,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
             ),
           ),
-          _buildDrawerOption("About Us", () {
+          _buildDrawerOption("About", () {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -162,21 +162,21 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   width: 0,
                 ),
 
-          Provider.of<Data>(context).loggedin == true
-              ? _buildDrawerOption("LogOut", () {
-                  Provider.of<Data>(context, listen: false).logout();
-                  FirebaseAuth.instance.signOut();
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => MyHomePage(),
-                    ),
-                  );
-                })
-              : Container(
-                  height: 0,
-                  width: 0,
-                ),
+          // Provider.of<Data>(context).loggedin == true
+          //     ? _buildDrawerOption("LogOut", () {
+          //         Provider.of<Data>(context, listen: false).logout();
+          //         FirebaseAuth.instance.signOut();
+          //         Navigator.pushReplacement(
+          //           context,
+          //           MaterialPageRoute(
+          //             builder: (_) => MyHomePage(),
+          //           ),
+          //         );
+          //       })
+          //     : Container(
+          //         height: 0,
+          //         width: 0,
+          //       ),
         ],
       ),
     );

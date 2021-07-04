@@ -104,7 +104,7 @@ class _SpecialState extends State<Special> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(10.0),
               child: Text(
                 // Provider.of<Data>(context, listen: false).name,
                 Provider.of<Data>(context).currentnname == null
@@ -119,17 +119,13 @@ class _SpecialState extends State<Special> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(12.0),
               child: Text(
                 Provider.of<Data>(context, listen: false).currentndesc == null
                     ? "loading.."
                     : Provider.of<Data>(context).currentndesc,
-                style: TextStyle(
-                  fontFamily: 'Ubuntu',
-                  color: Color(0xFFDFDFDF),
-                  fontSize: 15,
-                  fontWeight: FontWeight.w900,
-                ),
+                textAlign: TextAlign.justify,
+                style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
               ),
             )
           ],
@@ -172,9 +168,9 @@ class _SpecialState extends State<Special> {
                             style: TextStyle(
                                 color: Color.fromRGBO(40, 115, 161, 1.0)),
                           ),
-                          subtitle: Text(
-                              Provider.of<Data>(context, listen: false)
-                                  .nli[index]["description"]),
+                          // subtitle: Text(
+                          //     Provider.of<Data>(context, listen: false)
+                          //         .nli[index]["description"]),
                           onTap: () {
                             if ((Provider.of<Data>(context, listen: false)
                                         .loggedin ==
@@ -232,7 +228,7 @@ class _SpecialState extends State<Special> {
               SizedBox(
                 height: 8,
               ),
-              Text('Exercises',
+              Text('Wellness Solutions',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,

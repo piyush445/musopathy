@@ -66,26 +66,40 @@ class _ContactScreenState extends State<ContactScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "For Queries Contact",
-                              textAlign: TextAlign.justify,
-                              style: TextStyle(
-                                  fontFamily: 'Poppins', fontSize: 20),
-                            ),
+                            // Text(
+                            //   "For Queries Contact",
+                            //   textAlign: TextAlign.justify,
+                            //   style: TextStyle(
+                            //       fontFamily: 'Poppins', fontSize: 20),
+                            // ),
                             Text(
                               "Musopathy Foundation",
                               textAlign: TextAlign.justify,
                               style: TextStyle(
-                                  fontFamily: 'Poppins', fontSize: 18),
+                                  fontFamily: 'Poppins',
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              "Email: Wellness@musopathy.com",
+                              "Schedule Personalised Sessions at:",
+                              //textAlign: TextAlign.justify,
+                              style: TextStyle(
+                                  fontFamily: 'Poppins', fontSize: 20),
+                            ),
+                            Text(
+                              "www.musopathy.com",
                               textAlign: TextAlign.justify,
                               style: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 18),
                             ),
                             Text(
-                              "Phone/whatsapp: +91 9663378987",
+                              "wellness@musopathy.com",
+                              textAlign: TextAlign.justify,
+                              style: TextStyle(
+                                  fontFamily: 'Poppins', fontSize: 18),
+                            ),
+                            Text(
+                              "+91 9663378987, +91 9892760488",
                               textAlign: TextAlign.justify,
                               style: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 18),

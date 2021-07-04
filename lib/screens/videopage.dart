@@ -120,7 +120,7 @@ class _VideoPageState extends State<VideoPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(10.0),
               child: Text(
                 // Provider.of<Data>(context, listen: false).name,
                 Provider.of<Data>(context).currentname == null
@@ -135,17 +135,13 @@ class _VideoPageState extends State<VideoPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(10.0),
               child: Text(
                 Provider.of<Data>(context).currentdesc == null
                     ? "loading.."
                     : Provider.of<Data>(context).currentdesc,
-                style: TextStyle(
-                  fontFamily: 'Ubuntu',
-                  color: Color(0xFFDFDFDF),
-                  fontSize: 15,
-                  fontWeight: FontWeight.w900,
-                ),
+                textAlign: TextAlign.justify,
+                style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
               ),
             )
           ],
@@ -190,9 +186,9 @@ class _VideoPageState extends State<VideoPage> {
                             style: TextStyle(
                                 color: Color.fromRGBO(40, 115, 161, 1.0)),
                           ),
-                          subtitle: Text(
-                              Provider.of<Data>(context, listen: false)
-                                  .li[index]["description"]),
+                          // subtitle: Text(
+                          //     Provider.of<Data>(context, listen: false)
+                          //         .li[index]["description"]),
                           onTap: () {
                             if ((index > 0 && index < 8)) {
                               if ((Provider.of<Data>(context, listen: false)

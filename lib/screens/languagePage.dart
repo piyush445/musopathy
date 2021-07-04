@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:musopathy/models/data.dart';
+import 'package:musopathy/screens/contact.dart';
 import 'package:musopathy/screens/videopage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:musopathy/widgets/custom_drawer.dart';
@@ -49,7 +50,7 @@ class _LanguageState extends State<Language> {
           iconTheme: IconThemeData(color: Color.fromRGBO(40, 115, 161, 1.0)),
           backgroundColor: Colors.white,
           title: Text(
-            'A b o u t  U s',
+            'M U S O P A T H Y',
             style: TextStyle(
               fontFamily: 'Ubuntu',
               fontSize: 20,
@@ -161,46 +162,52 @@ class _LanguageState extends State<Language> {
                           ],
                         ),
                       ),
-                      Center(
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: Color.fromRGBO(14, 81, 102, 1.0),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 30, vertical: 14)),
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text('Schedule Live Appointment'),
-                                  content: Text(
-                                    "+91 9663378987 \n+91 9892760488",
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      child: Text('OK'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
-                          child: new Text(
-                            "Join Live Courses",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 1.5,
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Center(
+                      //   child: ElevatedButton(
+                      //     style: ElevatedButton.styleFrom(
+                      //         primary: Color.fromRGBO(14, 81, 102, 1.0),
+                      //         shape: RoundedRectangleBorder(
+                      //             borderRadius: BorderRadius.circular(10.0)),
+                      //         padding: EdgeInsets.symmetric(
+                      //             horizontal: 30, vertical: 14)),
+                      //     onPressed: () {
+                      //       // showDialog(
+                      //       //   context: context,
+                      //       //   builder: (BuildContext context) {
+                      //       //     return AlertDialog(
+                      //       //       title: Text('Schedule Live Appointment'),
+                      //       //       content: Text(
+                      //       //         "+91 9663378987 \n+91 9892760488",
+                      //       //         style: TextStyle(fontSize: 20),
+                      //       //       ),
+                      //       //       actions: [
+                      //       //         TextButton(
+                      //       //           onPressed: () => Navigator.pop(context),
+                      //       //           child: Text('OK'),
+                      //       //         ),
+                      //       //       ],
+                      //       //     );
+                      //       //   },
+                      //       // );
+                      //       Navigator.pushReplacement(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //           builder: (_) => ContactScreen(),
+                      //         ),
+                      //       );
+                      //     },
+                      //     child: new Text(
+                      //       "Schedule Live Appointment",
+                      //       textAlign: TextAlign.center,
+                      //       style: TextStyle(
+                      //         color: Colors.white,
+                      //         fontSize: 16.0,
+                      //         fontWeight: FontWeight.w600,
+                      //         letterSpacing: 1.5,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ]))));
   }
 }

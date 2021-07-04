@@ -133,7 +133,7 @@ class WebViewExampleState extends State<WebViewExample> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  'Musopathy provides revolutionary tools for individual and organizational Health and Wellness like the Tonation Breathing Techniques (TBT) Program to manage Covid Symptoms, Anxiety and Depression. TBT is a specially evolved program that includes diverse non-strenuous Breathing techniques anchored on published studies by Harvard, Johns Hopkins etc. The special feature is the addition of Tonation through hostrils or lips to most techniques which has enabled hundreds to improve their lung, immunological and psychological health besides increasing focus energy, clarity, decision making abilities and decreasing stress and fatigue.',
+                  "The Musopathy Tonation Breathing Techniques (TBT) are being used by a number of people to improve Covid and general Health and enhance Wellness.  Musopathy Mind Engineering and Management sessions are being taken by both organizations and individuals for excellence, leadership and team building.  TBT consist of diverse non-strenuous and easily practicable breathing and Tonation exercises.  The applications range from Covid management and rehab to respiratory and immunological health as well as management of Pain, Sinus, Muscle Tension, Insomnia, Stress, Anxiety, Phobia, Panic, Depression and as Cognitive Behavioral Therapy (CBT).  Hundreds of participants of TBT sessions have also reported increased focus, clarity, calmness and on overall sense of enhanced wellness.",
                   textAlign: TextAlign.justify,
                   style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
                 ),
@@ -142,7 +142,7 @@ class WebViewExampleState extends State<WebViewExample> {
               //   height: 20.0,
               // ),
               Button(
-                "SignUp/SignIn",
+                "Login/Register",
                 //   style: TextStyle(fontSize: 20),
                 //   textAlign: TextAlign.center,
                 // ),
@@ -187,17 +187,17 @@ class WebViewExampleState extends State<WebViewExample> {
               SizedBox(
                 height: 2.0,
               ),
-              Button(
-                "Exercises",
-                // style: TextStyle(fontSize: 20),
-                // textAlign: TextAlign.center,
+              // Button(
+              //   "Exercises",
+              //   // style: TextStyle(fontSize: 20),
+              //   // textAlign: TextAlign.center,
 
-                () async {
-                  await _controller.clearCache();
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (_) => Language()));
-                },
-              )
+              //   () async {
+              //     await _controller.clearCache();
+              //     Navigator.pushReplacement(
+              //         context, MaterialPageRoute(builder: (_) => Language()));
+              //   },
+              // )
             ],
           ),
         ),
