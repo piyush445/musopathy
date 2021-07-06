@@ -70,80 +70,90 @@ class _VideoPageState extends State<VideoPage> {
       ),
       body: DraggableBottomSheet(
         backgroundWidget: SingleChildScrollView(
+          child: Container(
+            //height: 300,
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            LimitedBox(
-              maxHeight: 230,
-              maxWidth: double.infinity,
-              child: FutureBuilder<int>(
-                future: result, // a previously-obtained Future<String> or null
-                builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-                  if (snapshot.hasData &&
-                      Provider.of<Data>(context).currentUrl != null) {
-                    return WebView(
-                        initialUrl: Provider.of<Data>(context).currentUrl,
-                        javascriptMode: JavascriptMode.unrestricted,
-                        onWebViewCreated: (WebViewController c) {
-                          _controller = c;
-                        });
-                  } else if (snapshot.hasError) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.error_outline,
-                          color: Colors.red,
-                          size: 60,
-                        ),
-                        Text(
-                          "net:: ERR_INTERNET_DISCONNECTED",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        GestureDetector(
-                          child: Text("Tap to retry once connected"),
-                          onTap: () {
-                            setState(() {});
-                          },
-                        ),
-                      ],
-                    );
-                  } else {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(
-                // Provider.of<Data>(context, listen: false).name,
-                Provider.of<Data>(context).currentname == null
-                    ? "loading.."
-                    : Provider.of<Data>(context).currentname,
-                style: TextStyle(
-                  fontFamily: 'Ubuntu',
-                  color: Colors.black,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w900,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                LimitedBox(
+                  maxHeight: 230,
+                  maxWidth: double.infinity,
+                  child: FutureBuilder<int>(
+                    future:
+                        result, // a previously-obtained Future<String> or null
+                    builder:
+                        (BuildContext context, AsyncSnapshot<int> snapshot) {
+                      if (snapshot.hasData &&
+                          Provider.of<Data>(context).currentUrl != null) {
+                        return WebView(
+                            initialUrl: Provider.of<Data>(context).currentUrl,
+                            javascriptMode: JavascriptMode.unrestricted,
+                            onWebViewCreated: (WebViewController c) {
+                              _controller = c;
+                            });
+                      } else if (snapshot.hasError) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.error_outline,
+                              color: Colors.red,
+                              size: 60,
+                            ),
+                            Text(
+                              "net:: ERR_INTERNET_DISCONNECTED",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            GestureDetector(
+                              child: Text("Tap to retry once connected"),
+                              onTap: () {
+                                setState(() {});
+                              },
+                            ),
+                          ],
+                        );
+                      } else {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    },
+                  ),
                 ),
-              ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                  child: Text(
+                    // Provider.of<Data>(context, listen: false).name,
+                    Provider.of<Data>(context).currentname == null
+                        ? "loading.."
+                        : Provider.of<Data>(context).currentname,
+                    style: TextStyle(
+                      fontFamily: 'Ubuntu',
+                      color: Colors.black,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text(
+                    Provider.of<Data>(context).currentdesc == null
+                        ? "loading.."
+                        : Provider.of<Data>(context).currentdesc,
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
+                  ),
+                ),
+                SizedBox(
+                  height: 70,
+                )
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(
-                Provider.of<Data>(context).currentdesc == null
-                    ? "loading.."
-                    : Provider.of<Data>(context).currentdesc,
-                textAlign: TextAlign.justify,
-                style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
-              ),
-            )
-          ],
-        )),
+          ),
+        ),
         expandedChild: DraggableScrollableSheet(
           initialChildSize: 0.8,
           minChildSize: 0.8,
@@ -236,7 +246,7 @@ class _VideoPageState extends State<VideoPage> {
           ),
         ),
         previewChild: Container(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
                 color: Color.fromRGBO(40, 115, 161, 1.0),
                 borderRadius: BorderRadius.only(
@@ -245,7 +255,7 @@ class _VideoPageState extends State<VideoPage> {
             child: Column(children: <Widget>[
               Container(
                 width: 40,
-                height: 6,
+                height: 4,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10)),
@@ -260,7 +270,7 @@ class _VideoPageState extends State<VideoPage> {
                       fontWeight: FontWeight.bold)),
               //SizedBox(height: 16),
             ])),
-        minExtent: 65,
+        minExtent: 55,
         maxExtent: MediaQuery.of(context).size.height * 0.8,
       ),
     );

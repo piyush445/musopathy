@@ -56,79 +56,86 @@ class _SpecialState extends State<Special> {
       ),
       body: DraggableBottomSheet(
         backgroundWidget: SingleChildScrollView(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            LimitedBox(
-              maxHeight: 230,
-              maxWidth: double.infinity,
-              child: FutureBuilder<int>(
-                future: result, // a previously-obtained Future<String> or null
-                builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-                  if (snapshot.hasData &&
-                      Provider.of<Data>(context).currentnUrl != null) {
-                    return WebView(
-                        initialUrl: Provider.of<Data>(context).currentnUrl,
-                        javascriptMode: JavascriptMode.unrestricted,
-                        onWebViewCreated: (WebViewController c) {
-                          _controller = c;
-                        });
-                  } else if (snapshot.hasError) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.error_outline,
-                          color: Colors.red,
-                          size: 60,
-                        ),
-                        Text(
-                          "net:: ERR_INTERNET_DISCONNECTED",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
+            child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              LimitedBox(
+                maxHeight: 230,
+                maxWidth: double.infinity,
+                child: FutureBuilder<int>(
+                  future:
+                      result, // a previously-obtained Future<String> or null
+                  builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                    if (snapshot.hasData &&
+                        Provider.of<Data>(context).currentnUrl != null) {
+                      return WebView(
+                          initialUrl: Provider.of<Data>(context).currentnUrl,
+                          javascriptMode: JavascriptMode.unrestricted,
+                          onWebViewCreated: (WebViewController c) {
+                            _controller = c;
+                          });
+                    } else if (snapshot.hasError) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.error_outline,
+                            color: Colors.red,
+                            size: 60,
                           ),
-                        ),
-                        GestureDetector(
-                          child: Text("Tap to retry once connected"),
-                          onTap: () {
-                            setState(() {});
-                          },
-                        ),
-                      ],
-                    );
-                  } else {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(
-                // Provider.of<Data>(context, listen: false).name,
-                Provider.of<Data>(context).currentnname == null
-                    ? "loading.."
-                    : Provider.of<Data>(context).currentnname,
-                style: TextStyle(
-                  fontFamily: 'Ubuntu',
-                  color: Colors.black,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w900,
+                          Text(
+                            "net:: ERR_INTERNET_DISCONNECTED",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          GestureDetector(
+                            child: Text("Tap to retry once connected"),
+                            onTap: () {
+                              setState(() {});
+                            },
+                          ),
+                        ],
+                      );
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  },
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                Provider.of<Data>(context, listen: false).currentndesc == null
-                    ? "loading.."
-                    : Provider.of<Data>(context).currentndesc,
-                textAlign: TextAlign.justify,
-                style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                child: Text(
+                  // Provider.of<Data>(context, listen: false).name,
+                  Provider.of<Data>(context).currentnname == null
+                      ? "loading.."
+                      : Provider.of<Data>(context).currentnname,
+                  style: TextStyle(
+                    fontFamily: 'Ubuntu',
+                    color: Colors.black,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
               ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  Provider.of<Data>(context, listen: false).currentndesc == null
+                      ? "loading.."
+                      : Provider.of<Data>(context).currentndesc,
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
+                ),
+              ),
+              SizedBox(
+                height: 70,
+              )
+            ],
+          ),
         )),
         expandedChild: DraggableScrollableSheet(
           initialChildSize: 0.8,
@@ -220,7 +227,7 @@ class _SpecialState extends State<Special> {
             child: Column(children: <Widget>[
               Container(
                 width: 40,
-                height: 6,
+                height: 4,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10)),

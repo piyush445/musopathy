@@ -59,7 +59,20 @@ class SignInwidget extends State<SignIn> {
           null,
           null,
           added,
-          [true, false, false, false, false, false, false, false],
+          [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
         );
         user.addUser();
         // Provider.of<Data>(context, listen: false).verify();

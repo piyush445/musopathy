@@ -157,6 +157,8 @@ class Registerwidget extends State<Register> {
                             false,
                             false,
                             false,
+                            false,
+                            false,
                           ],
                         );
                         user.addUser();
