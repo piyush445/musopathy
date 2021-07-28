@@ -47,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
-                        'Tonation Breathing Techniques to \nCombat Covid & Other Conditions ',
+                        'Tonation Breathing Techniques for \n Wellness and Excellence',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 15,

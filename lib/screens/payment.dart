@@ -192,7 +192,7 @@ Do not begin any exercises including the Musopathy techniques if you have high f
 Stop immediately if you develop dizziness, undue shortness of breath, chest pain, cool, clammy skin, fatigue, irregular heartbeat or any symptoms you consider an emergency. 
 Get emergency attention immediately if these symptoms don’t stop with rest or if you experience any change in physical or mental status from your normal capacity. 
 
-Musopathy Tonation Breathing Techniques (TBT) program is only a supplement to - and not a substitute for - standard clinical treatment for COVID-19 or any other condition. So do NOT stop your medication without your Doctor’s consent and always follow standard Covid safety guidelines of social distancing, appropriate masking, face and hand hygiene, vaccination etc.  
+Musopathy Tonation Breathing Techniques (TBT) program is only a supplement to - and not a substitute for - standard clinical treatment. So do NOT stop your medication without your Doctor’s consent.  
 
                                         """),
                               actions: [

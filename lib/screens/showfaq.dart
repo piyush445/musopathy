@@ -62,7 +62,7 @@ class ShowFaq extends StatelessWidget {
     // ]),
     Entry("How is Musopathy different from other breathing programs?", <Entry>[
       Entry(
-          "Though the distinctiveness of the Musopathy program is due to: \n (a) Adding Tonation to several techniques to leverage on the benefits of both the sound wave and the vibration generated in the associated parts of the body including respiratory passages \n (b) Selecting the easiest techniques that have benefited millions and re-engineering some at a subtle level  \n (c) Simplifying even intricate techniques to make them more accessible  \n (d) Introducing variations designed to provide targeted benefits  \n (e) Coining across the board user friendly terms  \n (f) Creating a mix of these to ensure that users enjoy the maximum benefits with minimal investment of time and effort by following even a subset of them."),
+          "The distinctiveness of the TBT program is due to: \n (a) Adding Tonation to several techniques to leverage on the benefits of both the sound wave and the vibration generated in the associated parts of the body including respiratory passages \n (b) Selecting the easiest techniques that have benefited millions and re-engineering some at a subtle level  \n (c) Simplifying even intricate techniques to make them more accessible  \n (d) Introducing variations designed to provide targeted benefits  \n (e) Coining across the board user friendly terms  \n (f) Creating a mix of these to ensure that users enjoy the maximum benefits with minimal investment of time and effort by following even a subset of them."),
     ]),
     // Entry("What benefits do I derive from these sessions?", <Entry>[
     //   Entry(

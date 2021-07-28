@@ -131,7 +131,12 @@ class WebViewExampleState extends State<WebViewExample> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  "The Musopathy Tonation Breathing Techniques (TBT) are being used by a number of people to improve Covid and general Health and enhance Wellness.  Musopathy Mind Engineering and Management sessions are being taken by both organizations and individuals for excellence, leadership and team building.  TBT consist of diverse non-strenuous and easily practicable breathing and Tonation exercises.  The applications range from Covid management and rehab to respiratory and immunological health as well as management of Pain, Sinus, Muscle Tension, Insomnia, Stress, Anxiety, Phobia, Panic, Depression and as Cognitive Behavioral Therapy (CBT).  Hundreds of participants of TBT sessions have also reported increased focus, clarity, calmness and on overall sense of enhanced wellness.",
+                  "The Musopathy TBT Health and Wellness App consists of instructional videos of non-strenuous Tonation Breathing Techniques (TBTs) that can help you combat several conditions including the following:
+
+ Respiratory issues related to Common Cold, Covid, COPD, Muscular tension, Sinus headaches, Sleep disorders, Stress, Anxiety, Depression, Aggression, Anger, Panic & Phobia and other Behavioral issues.  It also helps in Pain Management and Mind Management by increasing focus, clarity, calmness, energy, stamina, and equanimity. 
+
+The TBT Wellness Videos** are of two types: (a) TBT Techniques such as Nasal Tonation, Buzz Tonation, Pursed Lips Tonation & Pronal Tonation and (b) Applications for various conditions mentioned above.  The duration of each video has been intentionally kept short to enable participants to stay focused and grasp the technique easily and do it themselves thereafter.  
+.",
                   textAlign: TextAlign.justify,
                   style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
                 ),
