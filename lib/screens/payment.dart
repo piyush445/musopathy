@@ -186,13 +186,13 @@ class _PaymentState extends State<Payment> {
                             child: AlertDialog(
                               title: Text('Precautions and Disclaimers'),
                               content: Text("""
-There are no known risks associated with the Musopathy Tonation Breathing Techniques (TBT) program.  It has been designed to be less strenuous than talking.   But please note and follow the PRECAUTIONS below carefully.
+There are no known risks associated with the Clinics Tonation Breathing Techniques (TBT) program.  It has been designed to be less strenuous than talking.   But please note and follow the PRECAUTIONS below carefully.
 
-Do not begin any exercises including the Musopathy techniques if you have high fever, difficulty breathing, chest pain or heart palpitations or new swelling in your legs.  
+Do not begin any exercises including the Clinics techniques if you have high fever, difficulty breathing, chest pain or heart palpitations or new swelling in your legs.  
 Stop immediately if you develop dizziness, undue shortness of breath, chest pain, cool, clammy skin, fatigue, irregular heartbeat or any symptoms you consider an emergency. 
 Get emergency attention immediately if these symptoms don’t stop with rest or if you experience any change in physical or mental status from your normal capacity. 
 
-Musopathy Tonation Breathing Techniques (TBT) program is only a supplement to - and not a substitute for - standard clinical treatment. So do NOT stop your medication without your Doctor’s consent.  
+Clisonics Tonation Breathing Techniques (TBT) program is only a supplement to - and not a substitute for - standard clinical treatment. So do NOT stop your medication without your Doctor’s consent.  
 
                                         """),
                               actions: [
@@ -246,7 +246,7 @@ Musopathy Tonation Breathing Techniques (TBT) program is only a supplement to - 
     var options = {
       'key': 'rzp_test_NHgsWGJDPm1A5h',
       'amount': amount * 100,
-      'name': 'MUSOPATHY',
+      'name': 'CLISONICS',
       'description': 'videos access',
       'prefill': {'contact': '', 'email': ''},
       'external': {

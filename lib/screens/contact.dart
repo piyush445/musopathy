@@ -46,7 +46,7 @@ class _ContactScreenState extends State<ContactScreen> {
                   Email email = Email(
                     body: 'Email body',
                     subject: 'Email subject',
-                    recipients: ['Wellness@musopathy.com'],
+                    recipients: ['wellness@clisonics.com'],
                     isHTML: false,
                   );
 
@@ -73,7 +73,7 @@ class _ContactScreenState extends State<ContactScreen> {
                             //       fontFamily: 'Poppins', fontSize: 20),
                             // ),
                             Text(
-                              "Musopathy Foundation",
+                              "Clinical Sonic Solutions",
                               textAlign: TextAlign.justify,
                               style: TextStyle(
                                   fontFamily: 'Poppins',
@@ -87,13 +87,13 @@ class _ContactScreenState extends State<ContactScreen> {
                                   fontFamily: 'Poppins', fontSize: 20),
                             ),
                             Text(
-                              "www.musopathy.com",
+                              "clisonics.com",
                               textAlign: TextAlign.justify,
                               style: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 18),
                             ),
                             Text(
-                              "wellness@musopathy.com",
+                              "wellness@clisonics.com",
                               textAlign: TextAlign.justify,
                               style: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 18),

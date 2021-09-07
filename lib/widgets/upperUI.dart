@@ -27,7 +27,7 @@ class UpperUI extends StatelessWidget {
                     bottom: 200,
                     left: 90,
                     child: Text(
-                      'MUSOPATHY',
+                      'CLISONICS',
                       style: TextStyle(
                           fontFamily: 'Ubuntu',
                           fontSize: 22.0,

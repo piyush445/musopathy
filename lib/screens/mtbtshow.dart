@@ -6,16 +6,13 @@ import 'package:musopathy/widgets/custom_drawer.dart';
 class Mtbtshow extends StatelessWidget {
   final List<Mtbt> data = [
     Mtbt(
-        "Musopathy is the study of the fundamental mechanics of musical impact on different parts of the brain or body of humans, animals, plants and micro entities in a quantifiably precise manner.  Musopathy re-engineers the arena of Music Therapy with its de-regionalised and de-culturalised creations of Clinical Music for more precise studies and is therefore an exciting area with huge therapeutic as well as commercial potential.",
-        Colors.white),
-    Mtbt(
-        "Applied Musopathy offers specially evolved evidence-based Health and Wellness solutions through its Tonation Breathing Techniques (TBT) or other programs for a variety of health conditions. There are also specialized Mind Engineering and Management (MEM) Courses for Individual and Organizational Wellbeing.",
+        "Clisonics offers specially evolved evidence-based Health and Wellness solutions through its Tonation Breathing Techniques (TBT) or other programs for a variety of health conditions. There are also specialized Mind Engineering and Management (MEM) Courses for Individual and Organizational Wellbeing.",
         Colors.white),
     Mtbt(
         "Tonation Breathing Techniques (TBT): A unique combination of diverse non-strenuous specialized breathing techniques with the unique addition of Tonation which is anchored on published studies in leading journals",
         Colors.white),
     Mtbt(
-        "UUniqueness \n\nOptimal benefits:  Many programs focus on Breathing techniques, music therapy, mindfulness, meditation, biofeedback etc. By uniquely introducing Tonatio to most breathing techniques, the TBT program gives exponential benefits to patients as well as healthy participants.\n\n Simplified: TBT includes only the easiest techniques and simplifications of even seemingly challenging ones from other programs to not tax even the severely weakened. Variations: Several variations have been introduced to provide higher benefits by engaging more of the respiratory pathways.\n\n Minimalistic approach: TBT emphasises on the most essential techniques to ensure that even 2-3 minutes .\nFocus: The TBT twin mantra of Mindfulness and Restfulness is life enhancing and - at times, life saving. \n ",
+        "Uniqueness \n\nOptimal benefits:  Many programs focus on Breathing techniques, music therapy, mindfulness, meditation, biofeedback etc. By uniquely introducing Tonatio to most breathing techniques, the TBT program gives exponential benefits to patients as well as healthy participants.\n\n Simplified: TBT includes only the easiest techniques and simplifications of even seemingly challenging ones from other programs to not tax even the severely weakened. Variations: Several variations have been introduced to provide higher benefits by engaging more of the respiratory pathways.\n\n Minimalistic approach: TBT emphasises on the most essential techniques to ensure that even 2-3 minutes .\nFocus: The TBT twin mantra of Mindfulness and Restfulness is life enhancing and - at times, life saving. \n ",
         Colors.white),
     // Mtbt(, c),
     // Mtbt(text, c),

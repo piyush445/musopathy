@@ -191,11 +191,11 @@ class Registerwidget extends State<Register> {
                             child: AlertDialog(
                               title: Text('Terms and Conditions'),
                               content: Text("""
-MUSOPATHY COVI SUP APP 
+CLISONICS APP 
 
 OVERVIEW
 
-This Website and App - hereafter referred to as “Content” or simply “Website” are presented by the Musopathy Foundation in collaboration with various partners. Throughout the site, the terms “we”, “us” and “our” refer to Musopathy Foundation. Musopathy Foundation offers this website, including all information, tools and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.
+This App - hereafter referred to as “Content” or simply “Website” are presented by Clinical Sonic Solutions, also known as Clisonics in collaboration with various partners. Throughout the site, the terms “we”, “us” and “our” refer to Clisonics.  Clisonics offers this website, including all information, tools and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.
 
 By accessing and / or purchasing content  from us, you engage in our “Service” and agree to be bound by the following terms and conditions (“Terms of Service”, “Terms”), including those additional terms and conditions and policies referenced herein and/or available by hyperlink. These Terms of Service apply to all users of the site, including without limitation users who are browsers, vendors, customers, merchants, and/ or contributors of content.
 
@@ -295,11 +295,11 @@ You agree that from time to time we may remove the service for indefinite period
 
 You expressly agree that your use of, or inability to use, the service is at your sole risk. The service and all products and services delivered to you through the service are (except as expressly stated by us) provided 'as is' and 'as available' for your use, without any representation, warranties or conditions of any kind, either express or implied, including all implied warranties or conditions of merchantability, merchantable quality, fitness for a particular purpose, durability, title, and non-infringement.
 
-In no case shall Musopathy Foundation, our directors, officers, employees, collaborators, partners, affiliates, agents, contractors, interns, suppliers, service providers or licensors be liable for any injury, loss, claim, or any direct, indirect, incidental, punitive, special, or consequential damages of any kind, including, without limitation lost profits, lost revenue, lost savings, loss of data, replacement costs, or any similar damages, whether based in contract, tort (including negligence), strict liability or otherwise, arising from your use of any of the service or any products procured using the service, or for any other claim related in any way to your use of the service or any product, including, but not limited to, any errors or omissions in any content, or any loss or damage of any kind incurred as a result of the use of the service or any content (or product) posted, transmitted, or otherwise made available via the service, even if advised of their possibility. Because some states or jurisdictions do not allow the exclusion or the limitation of liability for consequential or incidental damages, in such states or jurisdictions, our liability shall be limited to the maximum amount spent by you to purchase our content and no more than that. 
+In no case shall Clisonics, our directors, officers, employees, collaborators, partners, affiliates, agents, contractors, interns, suppliers, service providers or licensors be liable for any injury, loss, claim, or any direct, indirect, incidental, punitive, special, or consequential damages of any kind, including, without limitation lost profits, lost revenue, lost savings, loss of data, replacement costs, or any similar damages, whether based in contract, tort (including negligence), strict liability or otherwise, arising from your use of any of the service or any products procured using the service, or for any other claim related in any way to your use of the service or any product, including, but not limited to, any errors or omissions in any content, or any loss or damage of any kind incurred as a result of the use of the service or any content (or product) posted, transmitted, or otherwise made available via the service, even if advised of their possibility. Because some states or jurisdictions do not allow the exclusion or the limitation of liability for consequential or incidental damages, in such states or jurisdictions, our liability shall be limited to the maximum amount spent by you to purchase our content and no more than that. 
 
 SECTION 13 - INDEMNIFICATION
 
-You agree to indemnify, defend and hold harmless Musopathy Foundation and our parent, subsidiaries, collaborators, partners, affiliates, partners, officers, directors, agents, contractors, licensors, service providers, subcontractors, suppliers, interns and employees, harmless from any claim or demand, including reasonable attorneys’ fees, made by any third-party due to or arising out of your breach of these Terms of Service or the documents they incorporate by reference, or your violation of any law or the rights of a third-party.
+You agree to indemnify, defend and hold harmless Clisonics and our parent, subsidiaries, collaborators, partners, affiliates, partners, officers, directors, agents, contractors, licensors, service providers, subcontractors, suppliers, interns and employees, harmless from any claim or demand, including reasonable attorneys’ fees, made by any third-party due to or arising out of your breach of these Terms of Service or the documents they incorporate by reference, or your violation of any law or the rights of a third-party.
 
 SECTION 14 - SEVERABILITY
 
@@ -333,7 +333,7 @@ We reserve the right, at our sole discretion, to update, change or replace any p
 
 SECTION 19 - CONTACT INFORMATION
 
-Questions about the Terms of Service should be sent to us at wellness@musopathy.com
+Questions about the Terms of Service should be sent to us at wellness@clisonics.com
 
  
 PRIVACY POLICY 
@@ -355,7 +355,7 @@ When you provide us with personal information to complete a transaction, verify 
 If we ask for your personal information for a secondary reason, like marketing, we will either ask you directly for your expressed consent, or provide you with an opportunity to say no.
  
 How do I withdraw my consent?
-If after you opt-in, you change your mind, you may withdraw your consent for us to contact you, for the continued collection, use or disclosure of your information, at anytime, by contacting us at wellness@musopathy.com or mailing us at: Musopathy Foundation, A Unit of Ravikiran Foundation of India, 105, 2nd cross, VGP Layout, Palavakkam, Chennai 600041
+If after you opt-in, you change your mind, you may withdraw your consent for us to contact you, for the continued collection, use or disclosure of your information, at anytime, by contacting us at wellness@clisonics.com 
  
 SECTION 3 - DISCLOSURE
 We may disclose your personal information if we are required by law to do so or if you violate our Terms of Service.
@@ -366,7 +366,7 @@ We use Razorpay or other appropriate platforms for processing payments. We/Razor
  
 Our payment gateway adheres to the standards set by PCI-DSS as managed by the PCI Security Standards Council, which is a joint effort of brands like Visa, MasterCard, American Express and Discover.
 PCI-DSS requirements help ensure the secure handling of credit card information by our store and its service providers.
-For more insight, you may also want to read terms and conditions of razorpay on https://razorpay.com 
+For more insight, you may also want to read terms and conditions of Vimeo/ Razorpay etc. 
  
 SECTION 5 - THIRD-PARTY SERVICES
  
@@ -387,13 +387,13 @@ SECTION 9 - CHANGES TO THIS PRIVACY POLICY
 We reserve the right to modify this privacy policy at any time, so please review it frequently. Changes and clarifications will take effect immediately upon their posting on the website. If we make material changes to this policy, we will notify you here that it has been updated, so that you are aware of what information we collect, how we use it, and under what circumstances, if any, we use and/or disclose it.
 If our store is acquired or merged with another company, your information may be transferred to the new owners so that we may continue to sell products to you.
 QUESTIONS AND CONTACT INFORMATION
-If you would like to: access, correct, amend or delete any personal information we have about you, register a complaint, or simply want more information contact our Privacy Compliance Officer at wellness@musopathy.com or by mail at Musopathy Foundation, 105, 2nd cross, VGP Layout, Palavakkam, Chennai 600041
+If you would like to: access, correct, amend or delete any personal information we have about you, register a complaint, or simply want more information contact our Privacy Compliance Officer at wellness@clisonics.com 
  
 REFUND POLICY 
 
-Several types of goods are exempt from being returned including Downloadable software products and some health and personal care items like the Tonation Breathing Technique or other Musopathy Programs.  There are no known risks involved in these types of non-strenuous breathing programs especially if you carefully follow the precautions mentioned by us. 
+Several types of goods are exempt from being returned including Downloadable software products and some health and personal care items like the Tonation Breathing Technique or other Clisonics Programs.  There are no known risks involved in these types of non-strenuous breathing programs especially if you carefully follow the precautions mentioned by us. 
 
-However, if you feel any physical discomfort and can prove that you had any complications solely because of the Musopathy programs within one week of payment, you will be entitled to a 100% refund of the amount you paid.
+However, if you feel any physical discomfort and can prove that you had any complications solely because of the Clisonics programs within one week of payment, you will be entitled to a 100% refund of the amount you paid.
 """),
                               actions: [
                                 TextButton(
