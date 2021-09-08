@@ -70,7 +70,7 @@ class ShowFaq extends StatelessWidget {
     // ]),
     Entry("Can I develop adverse symptoms ?", <Entry>[
       Entry(
-          "Musopathy does not lead to any adverse symptoms if instructions are followed. Any adverse symptoms could be the result of other conditions. Please consult your doctor in such cases. However, you can stop the exercises of you feel fatigued and try after sometime"),
+          "Musopathy does not lead to any adverse symptoms if instructions are followed. Any adverse symptoms could be the result of other conditions. Please consult your doctor in such cases. However, you can stop the exercises if you feel fatigued and try after sometime"),
     ]),
     Entry("Can Musopathy be personalized for me ?", <Entry>[
       Entry("Yes, please schedule an appointment with our team"),
